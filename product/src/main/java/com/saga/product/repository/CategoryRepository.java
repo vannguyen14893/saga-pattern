@@ -1,0 +1,7 @@
+package com.saga.product.repository;
+
+import com.saga.product.entity.Category;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CategoryRepository extends JpaRepository<Category, Long> {
+}
