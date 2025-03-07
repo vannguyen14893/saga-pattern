@@ -1,7 +1,11 @@
 package com.saga.inventory.grpc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
-import com.saga.inventory.entity.Inventory;
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.Option;
+import com.jayway.jsonpath.TypeRef;
+import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
 import com.saga.inventory.service.InventoryService;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
@@ -10,9 +14,9 @@ import org.saga.grpc.proto.CheckInventoryRequest;
 import org.saga.grpc.proto.CheckInventoryResponse;
 import org.saga.grpc.proto.InventoryGrpc;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static com.jayway.jsonpath.JsonPath.using;
 
 @GrpcService
 @RequiredArgsConstructor
@@ -21,11 +25,16 @@ public class InventoryGrpcService extends InventoryGrpc.InventoryImplBase {
 
     @Override
     public void checkInventory(CheckInventoryRequest checkInventoryRequest, StreamObserver<CheckInventoryResponse> responseObserver) {
-        String productId = checkInventoryRequest.getProductId();
-        List<Long> productIds =Arrays.stream(productId.split(",")).map(Long::valueOf).collect(Collectors.toList());
-        List<Inventory> inventory = inventoryService.findAllByProductIdIn(productIds);
-        String data = new Gson().toJson(inventory);
-        CheckInventoryResponse checkInventoryResponse = CheckInventoryResponse.newBuilder().setData(data).build();
+        String payload = checkInventoryRequest.getPayload();
+        Configuration configuration = Configuration.builder()
+                .mappingProvider(new JacksonMappingProvider(new ObjectMapper()))
+                .options(Option.DEFAULT_PATH_LEAF_TO_NULL)
+                .build();
+        TypeRef<List<Long>> typeProductIds = new TypeRef<>() {};
+        List<Long> productIds = using(configuration).parse(payload).read("$[*].productId", typeProductIds);
+        // Check which product IDs do not have enough stock
+        String data = new Gson().toJson(inventoryService.findAllByProductIdIn(productIds));
+        CheckInventoryResponse checkInventoryResponse = CheckInventoryResponse.newBuilder().build();
         responseObserver.onNext(checkInventoryResponse);
         responseObserver.onCompleted();
     }

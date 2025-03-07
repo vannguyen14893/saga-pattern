@@ -3,40 +3,59 @@
   <component name="CompilerConfiguration">
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
-      <profile name="Annotation profile for inventory" enabled="true">
+      <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath>
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="delivery" />
-        <module name="product" />
-        <module name="payment" />
-        <module name="inventory" />
-        <module name="order" />
-        <module name="customer" />
+        <module name="exception" />
       </profile>
-      <profile name="Annotation profile for orchestraion-order" enabled="true">
+      <profile name="Annotation profile for transaction" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath>
+        <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="orchestration-order" />
+        <module name="delivery" />
+        <module name="product" />
+        <module name="admin" />
+        <module name="inventory" />
+        <module name="send-email" />
+        <module name="iam" />
+        <module name="send-notification" />
+        <module name="payment" />
+        <module name="send-sms" />
+        <module name="transaction" />
+        <module name="orchestration-notify" />
+        <module name="order" />
+        <module name="customer" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="common" target="1.5" />
+      <module name="exceptions" target="21" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="admin" options="-parameters" />
+      <module name="common" options="" />
       <module name="customer" options="-parameters" />
       <module name="delivery" options="-parameters" />
+      <module name="exception" options="-parameters" />
+      <module name="exceptions" options="-parameters" />
+      <module name="iam" options="-parameters" />
       <module name="inventory" options="-parameters" />
+      <module name="orchestration-notify" options="-parameters" />
       <module name="orchestration-order" options="-parameters" />
       <module name="order" options="-parameters" />
       <module name="payment" options="-parameters" />
       <module name="product" options="-parameters" />
+      <module name="send-email" options="-parameters" />
+      <module name="send-notification" options="-parameters" />
+      <module name="send-sms" options="-parameters" />
+      <module name="transaction" options="-parameters" />
     </option>
   </component>
 </project>

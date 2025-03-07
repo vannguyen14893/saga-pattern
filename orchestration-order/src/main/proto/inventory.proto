@@ -10,7 +10,7 @@ service Inventory {
 }
 
 message CheckInventoryRequest {
-  string productId = 1;
+  string payload = 1;
 }
 
 message CheckInventoryResponse {

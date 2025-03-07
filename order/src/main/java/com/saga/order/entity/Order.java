@@ -18,8 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Order {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
     private String code;
     private BigDecimal totalAmount = new BigDecimal(0);
     private LocalDateTime createdDate;

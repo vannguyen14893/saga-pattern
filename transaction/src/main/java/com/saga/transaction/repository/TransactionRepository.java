@@ -1,18 +1,16 @@
-package com.saga.inventory.repository;
+package com.saga.transaction.repository;
 
-import com.saga.inventory.entity.Inventory;
+import com.saga.transaction.entity.Transaction;
 import jakarta.persistence.QueryHint;
 import org.hibernate.jpa.AvailableHints;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.QueryHints;
 
-import java.util.List;
 import java.util.stream.Stream;
 
-public interface InventoryRepository extends JpaRepository<Inventory, Long> {
-    Inventory findByProductId(Long productId);
+public interface TransactionRepository extends JpaRepository<Transaction, String> {
     @QueryHints(
             @QueryHint(name = AvailableHints.HINT_FETCH_SIZE, value = "25")
     )
-    Stream<Inventory> findAllByProductIdIn(List<Long> productIds);
+    Stream<Transaction> findAllByUserId(Long userId);
 }

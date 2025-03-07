@@ -6,15 +6,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class ConfirmCreateOrderAdapterProducer {
     private final KafkaTemplate<String, String> kafkaTemplate;
 
-    public void confirmCreateOrder(List<CreateOrderRequest.CreateOrderDetailRequest> createOrderDetailRequests) {
-        String payload = new Gson().toJson(createOrderDetailRequests);
+    public void confirmCreateOrder(CreateOrderRequest createOrderRequest) {
+        String payload = new Gson().toJson(createOrderRequest);
         kafkaTemplate.send("confirm-order", payload);
     }
 }

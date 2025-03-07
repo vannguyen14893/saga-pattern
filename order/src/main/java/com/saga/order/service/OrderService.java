@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -25,12 +26,15 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Order findById(Long orderId) {
+    public Order findById(String orderId) {
         return orderRepository.findById(orderId).orElse(null);
     }
 
     public Order create(CreateOrderRequest createOrderRequest) {
         Order order = new Order();
+        String orderId = createOrderRequest.orderId() != null ? createOrderRequest.orderId() : UUID
+                .randomUUID().toString();
+        order.setId(orderId);
         order.setCode("ABED");
         order.setCreatedDate(LocalDateTime.now());
         order.setStatus(OrderStatus.CREATE_NEW.name());
@@ -45,7 +49,7 @@ public class OrderService {
         }
         order.setOrderDetails(orderDetails);
         orderRepository.save(order);
-        confirmCreateOrderAdapterProducer.confirmCreateOrder(createOrderDetailRequests);
+        confirmCreateOrderAdapterProducer.confirmCreateOrder(createOrderRequest);
         return order;
     }
 
@@ -64,7 +68,7 @@ public class OrderService {
         return order;
     }
 
-    public Long updateStatus(Long orderId, String status) {
+    public String updateStatus(String orderId, String status) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new NullPointerException("order not found"));
         order.setStatus(status);
         orderRepository.save(order);

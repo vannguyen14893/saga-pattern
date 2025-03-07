@@ -23,7 +23,7 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> findById(@PathVariable Long id) {
+    public ResponseEntity<Order> findById(@PathVariable String id) {
         return new ResponseEntity<>(orderService.findById(id), HttpStatusCode.valueOf(200));
     }
 
@@ -38,7 +38,7 @@ public class OrderController {
     }
 
     @DeleteMapping("/{id}/{status}")
-    public ResponseEntity<Long> findById(@PathVariable Long id, @PathVariable String status) {
+    public ResponseEntity<String> findById(@PathVariable String id, @PathVariable String status) {
         return new ResponseEntity<>(orderService.updateStatus(id, status), HttpStatusCode.valueOf(200));
     }
 }

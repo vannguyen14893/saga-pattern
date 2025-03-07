@@ -1,7 +1,6 @@
 package com.saga.orchestration.adapter.consumer;
 
 import com.google.gson.Gson;
-import com.saga.orchestration.adapter.producer.UpdateInventoryAdapterProducer;
 import com.saga.orchestration.dto.request.CreateOrderRequest;
 import com.saga.orchestration.entity.OutboxEvent;
 import com.saga.orchestration.enums.AggregateType;
@@ -17,18 +16,16 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ConfirmCreateOrderAdapterConsumer {
-    private final UpdateInventoryAdapterProducer updateInventoryAdapterProducer;
+public class ConfirmUpdateInventoryAdapterConsumer {
     private final OutBoxEventService outBoxEventService;
 
-    @KafkaListener(topics = "confirm-order", groupId = "orchestration")
-    public void confirmCreateOrder(String payload) {
+    @KafkaListener(topics = "confirm-inventory", groupId = "orchestration")
+    public void confirmUpdateInventory(String payload) {
         CreateOrderRequest createOrderRequest = new Gson().fromJson(payload, CreateOrderRequest.class);
-        updateInventoryAdapterProducer.updateInventory(payload);
         OutboxEvent outboxEvent = new OutboxEvent();
         outboxEvent.setAggregateId(createOrderRequest.orderId());
         outboxEvent.setAggregateType(AggregateType.ORDER.name());
-        outboxEvent.setEventType(OrderStatus.ORDER_CREATED.name());
+        outboxEvent.setEventType(OrderStatus.ORDER_UPDATE_INVENTORY.name());
         outboxEvent.setPayload(payload);
         outboxEvent.setCreatedDate(LocalDateTime.now());
         outBoxEventService.create(outboxEvent);

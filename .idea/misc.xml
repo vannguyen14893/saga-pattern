@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/common/exceptions" />
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
@@ -13,7 +16,22 @@
         <option value="$PROJECT_DIR$/orchestraion-order/pom.xml" />
         <option value="$PROJECT_DIR$/orchestration-order/pom.xml" />
         <option value="$PROJECT_DIR$/customer/pom.xml" />
+        <option value="$PROJECT_DIR$/transaction/pom.xml" />
+        <option value="$PROJECT_DIR$/orchestration-notify/pom.xml" />
+        <option value="$PROJECT_DIR$/send-email/pom.xml" />
+        <option value="$PROJECT_DIR$/send-notification/pom.xml" />
+        <option value="$PROJECT_DIR$/send-sms/pom.xml" />
+        <option value="$PROJECT_DIR$/admin/pom.xml" />
+        <option value="$PROJECT_DIR$/common/pom.xml" />
+        <option value="$PROJECT_DIR$/common/exceptions/pom.xml" />
+        <option value="$PROJECT_DIR$/iam/pom.xml" />
       </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/common/exceptions/pom.xml" />
+        <option value="$PROJECT_DIR$/common/pom.xml" />
+      </set>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="22" project-jdk-type="JavaSDK">
