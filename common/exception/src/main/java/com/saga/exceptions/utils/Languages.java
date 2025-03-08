@@ -18,6 +18,7 @@ public class Languages {
         messages_en.put("password_valid", "Mật khẩu không đúng");
         messages_en.put("max_session", "Tài khoản này đã được đăng nhập từ một thiết bị khác!");
         messages_en.put("session_expired", "Phiên đăng nhập hết hạn");
+        messages_en.put("order_not_found", "Đơn hàng không tồn tại");
         messages_en.put("user_not_found", "Tài khoản không tồn tại");
         messages_en.put("201", "Tạo mới thành công");
         messages_en.put("200", "Thành công");

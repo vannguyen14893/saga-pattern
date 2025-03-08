@@ -1,0 +1,67 @@
+{
+  "groups": [
+    {
+      "name": "database",
+      "type": "com.saga.database.dto.DatabaseConfigProperties",
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "database.auto-commit",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
+    },
+    {
+      "name": "database.driver",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
+    },
+    {
+      "name": "database.enable",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
+    },
+    {
+      "name": "database.max-pool-size",
+      "type": "java.lang.Integer",
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
+    },
+    {
+      "name": "database.min-pool-size",
+      "type": "java.lang.Integer",
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
+    },
+    {
+      "name": "database.password",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
+    },
+    {
+      "name": "database.pool-name",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
+    },
+    {
+      "name": "database.properties",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
+    },
+    {
+      "name": "database.type",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
+    },
+    {
+      "name": "database.url",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
+    },
+    {
+      "name": "database.username",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
+    }
+  ],
+  "hints": []
+}

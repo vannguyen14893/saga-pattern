@@ -2,7 +2,6 @@ package com.saga.exceptions.annotaions;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import org.apache.commons.validator.routines.EmailValidator;
 
 public class EmailConstraintValidator implements ConstraintValidator<ValidEmail, String> {
 
@@ -12,6 +11,6 @@ public class EmailConstraintValidator implements ConstraintValidator<ValidEmail,
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        return email != null && EmailValidator.getInstance().isValid(email);
+        return email != null;
     }
 }

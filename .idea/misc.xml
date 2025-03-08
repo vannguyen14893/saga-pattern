@@ -25,12 +25,14 @@
         <option value="$PROJECT_DIR$/common/pom.xml" />
         <option value="$PROJECT_DIR$/common/exceptions/pom.xml" />
         <option value="$PROJECT_DIR$/iam/pom.xml" />
+        <option value="$PROJECT_DIR$/common/base-response/pom.xml" />
+        <option value="$PROJECT_DIR$/common/database-config/pom.xml" />
+        <option value="$PROJECT_DIR$/common/kafka-config/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/common/exceptions/pom.xml" />
-        <option value="$PROJECT_DIR$/common/pom.xml" />
       </set>
     </option>
   </component>

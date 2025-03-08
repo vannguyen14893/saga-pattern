@@ -8,12 +8,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="exception" />
+        <module name="base-response" />
+        <module name="kafka-config" />
       </profile>
-      <profile name="Annotation profile for transaction" enabled="true">
+      <profile name="Annotation profile for order" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
+        <processorPath>
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
         </processorPath>
         <module name="orchestration-order" />
@@ -33,20 +35,26 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="common" target="1.5" />
+      <module name="base-response (1)" target="21" />
+      <module name="database-config (1)" target="21" />
       <module name="exceptions" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="admin" options="-parameters" />
+      <module name="base-response" options="-parameters" />
+      <module name="base-response (1)" options="-parameters" />
       <module name="common" options="" />
       <module name="customer" options="-parameters" />
+      <module name="database-config" options="-parameters" />
+      <module name="database-config (1)" options="-parameters" />
       <module name="delivery" options="-parameters" />
       <module name="exception" options="-parameters" />
       <module name="exceptions" options="-parameters" />
       <module name="iam" options="-parameters" />
       <module name="inventory" options="-parameters" />
+      <module name="kafka-config" options="-parameters" />
       <module name="orchestration-notify" options="-parameters" />
       <module name="orchestration-order" options="-parameters" />
       <module name="order" options="-parameters" />

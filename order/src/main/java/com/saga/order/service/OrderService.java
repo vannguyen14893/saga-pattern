@@ -1,5 +1,6 @@
 package com.saga.order.service;
 
+import com.saga.exceptions.exceptions.NotFoundExceptionHandler;
 import com.saga.order.adapter.producer.ConfirmCreateOrderAdapterProducer;
 import com.saga.order.dto.request.CreateOrderRequest;
 import com.saga.order.dto.request.UpdateOrderRequest;
@@ -27,7 +28,7 @@ public class OrderService {
     }
 
     public Order findById(String orderId) {
-        return orderRepository.findById(orderId).orElse(null);
+        return orderRepository.findById(orderId).orElseThrow(() -> new NotFoundExceptionHandler("order"));
     }
 
     public Order create(CreateOrderRequest createOrderRequest) {
@@ -54,7 +55,7 @@ public class OrderService {
     }
 
     public Order update(UpdateOrderRequest updateOrderRequest) {
-        Order order = orderRepository.findById(updateOrderRequest.orderId()).orElseThrow(() -> new NullPointerException("order not found"));
+        Order order = orderRepository.findById(updateOrderRequest.orderId()).orElseThrow(() -> new NotFoundExceptionHandler("order"));
         List<OrderDetail> orderDetails = new ArrayList<>();
         for (UpdateOrderRequest.UpdateOrderDetailRequest updateOrderDetailRequest : updateOrderRequest.updateOrderDetailRequests()) {
             OrderDetail orderDetail = convert(updateOrderDetailRequest.quantity(), updateOrderDetailRequest.productId(), order);
@@ -69,7 +70,7 @@ public class OrderService {
     }
 
     public String updateStatus(String orderId, String status) {
-        Order order = orderRepository.findById(orderId).orElseThrow(() -> new NullPointerException("order not found"));
+        Order order = orderRepository.findById(orderId).orElseThrow(() -> new NotFoundExceptionHandler("order"));
         order.setStatus(status);
         orderRepository.save(order);
         return orderId;
