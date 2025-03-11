@@ -36,7 +36,7 @@ public class InventoryService {
     }
 
     public Inventory update(UpdateInventoryRequest.OrderDetailRequest updateInventoryRequest) {
-        Inventory inventory = inventoryRepository.findByProductId(updateInventoryRequest.productId());
+        Inventory inventory = new Inventory();
         inventory.setQuantity(inventory.getQuantity() - updateInventoryRequest.quantity());
         inventory.setProductId(updateInventoryRequest.productId());
         inventoryRepository.save(inventory);

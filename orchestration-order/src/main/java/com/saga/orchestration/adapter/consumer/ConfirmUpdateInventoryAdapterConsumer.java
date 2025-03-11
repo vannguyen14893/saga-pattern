@@ -1,7 +1,7 @@
 package com.saga.orchestration.adapter.consumer;
 
 import com.google.gson.Gson;
-import com.saga.orchestration.dto.request.CreateOrderRequest;
+import com.saga.dto.request.CreateOrderRequest;
 import com.saga.orchestration.entity.OutboxEvent;
 import com.saga.orchestration.enums.AggregateType;
 import com.saga.orchestration.enums.OrderStatus;

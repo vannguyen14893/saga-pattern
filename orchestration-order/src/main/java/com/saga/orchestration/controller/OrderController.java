@@ -2,7 +2,7 @@ package com.saga.orchestration.controller;
 
 
 import com.google.gson.Gson;
-import com.saga.orchestration.dto.request.CreateOrderRequest;
+import com.saga.dto.request.CreateOrderRequest;
 import com.saga.orchestration.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

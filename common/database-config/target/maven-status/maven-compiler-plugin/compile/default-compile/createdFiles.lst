@@ -1,4 +1,3 @@
 com\saga\database\dto\DatabaseConfigProperties.class
-com\saga\database\config\CommonConfigServiceImpl.class
 META-INF\spring-configuration-metadata.json
-com\saga\database\config\ConfigCommonService.class
+com\saga\database\config\DatabaseConfig.class

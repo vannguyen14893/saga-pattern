@@ -28,6 +28,8 @@
         <option value="$PROJECT_DIR$/common/base-response/pom.xml" />
         <option value="$PROJECT_DIR$/common/database-config/pom.xml" />
         <option value="$PROJECT_DIR$/common/kafka-config/pom.xml" />
+        <option value="$PROJECT_DIR$/common/grpc/pom.xml" />
+        <option value="$PROJECT_DIR$/common/dto/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
