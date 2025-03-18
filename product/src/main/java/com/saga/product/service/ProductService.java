@@ -1,11 +1,11 @@
 package com.saga.product.service;
 
+import com.saga.dto.enums.ActionType;
 import com.saga.product.adapter.producer.ProductAdapterProducer;
 import com.saga.product.dto.request.CreateProductRequest;
 import com.saga.product.dto.request.UpdateProductRequest;
 import com.saga.product.entity.Category;
 import com.saga.product.entity.Product;
-import com.saga.product.enums.ActionType;
 import com.saga.product.repository.CategoryRepository;
 import com.saga.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;

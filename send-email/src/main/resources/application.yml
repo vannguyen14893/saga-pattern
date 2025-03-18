@@ -1,0 +1,22 @@
+spring:
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: kevinnguyen14081993@gmail.com
+    password: vyhu kyrg vxay rhwj
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+server:
+  port: 8091
+kafka:
+  boot-strap-server: "localhost:29092"
+  group-id: "email"
+  properties-consumer:
+    max.poll.records: 1000

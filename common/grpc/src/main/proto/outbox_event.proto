@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "org.saga.grpc.proto";
+option java_outer_classname = "OutboxEventProto";
+
+service OutBoxEvent {
+  rpc SaveOutBoxEvent (OutBoxEventRequest) returns (OutBoxEventResponse) {
+  }
+}
+
+message OutBoxEventRequest {
+  string id = 1;
+  string aggregateType = 2;
+  string aggregateId = 3;
+  string eventType = 4;
+  string payload = 5;
+}
+
+message OutBoxEventResponse {
+  string data = 1;
+}

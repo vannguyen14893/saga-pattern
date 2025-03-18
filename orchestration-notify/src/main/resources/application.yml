@@ -1,0 +1,15 @@
+spring:
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+  main:
+    allow-bean-definition-overriding: true
+server:
+  port: 8089
+kafka:
+  boot-strap-server: "localhost:29092"
+  group-id: "notify"
+  properties-consumer:
+    max.poll.records: 100
+

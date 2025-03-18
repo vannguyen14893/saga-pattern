@@ -1,12 +1,28 @@
 spring:
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/transaction
-    username: root
-    password: 123456
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
+  main:
+    allow-bean-definition-overriding: true
+database:
+  enable: true
+  url: "jdbc:mysql://localhost:3306/transaction"
+  username: "root"
+  password: "123456"
+  driver: "com.mysql.cj.jdbc.Driver"
+  type: "com.zaxxer.hikari.HikariDataSource"
+  auto-commit: true
+  pool-name: "mysql-pool"
+  max-pool-size: 20
+  min-pool-size: 3
+  properties:
+    cachePrepStmts: "true"
+    prepStmtCacheSize: "250"
+    prepStmtCacheSqlLimit: "2048"
+    useServerPrepStmts: "true"
+kafka:
+  boot-strap-server: "localhost:29092"
+  group-id: "transaction"
 server:
   port: 8087

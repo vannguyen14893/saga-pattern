@@ -1,1 +1,13 @@
+E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\enums\ActionType.java
+E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\enums\EmailType.java
+E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\enums\NotifyStatus.java
+E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\enums\NotifyType.java
+E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\enums\SmsType.java
+E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\request\CreateEmailNotifyRequest.java
 E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\request\CreateOrderRequest.java
+E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\request\CreateOutboxEventRequest.java
+E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\request\CreateSmsNotifyRequest.java
+E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\request\EmailNotify.java
+E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\request\InventoryAdapterRequest.java
+E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\request\SmsNotify.java
+E:\1\saga-pattern\common\dto\src\main\java\com\saga\dto\request\TransactionAdapterRequest.java

@@ -20,8 +20,8 @@ public class OrderController extends BaseController {
     private final OrderService orderService;
 
     @GetMapping
-    public ResponseEntity<ResponseSuccess<List<Order>>> list() {
-        return execute(orderService.list(), 200);
+    public ResponseEntity<ResponseSuccess<List<Order>>> findAll() {
+        return execute(orderService.findAll(), 200);
     }
 
     @GetMapping("/{id}")
@@ -35,12 +35,12 @@ public class OrderController extends BaseController {
     }
 
     @PutMapping
-    public ResponseEntity<ResponseSuccess<Order>> update(@RequestBody UpdateOrderRequest updateOrderRequest) {
-        return execute(orderService.update(updateOrderRequest),20);
+    public ResponseEntity<ResponseSuccess<Order>> update(@RequestBody @Valid UpdateOrderRequest updateOrderRequest) {
+        return execute(orderService.update(updateOrderRequest), 20);
     }
 
     @DeleteMapping("/{id}/{status}")
-    public ResponseEntity<ResponseSuccess<String>> findById(@PathVariable String id, @PathVariable String status) {
-        return execute(orderService.updateStatus(id, status),200);
+    public ResponseEntity<ResponseSuccess<String>> deleteById(@PathVariable String id, @PathVariable String status) {
+        return execute(orderService.updateStatus(id, status), 200);
     }
 }

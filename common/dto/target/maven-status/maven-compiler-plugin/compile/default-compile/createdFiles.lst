@@ -1,2 +1,15 @@
+com\saga\dto\request\CreateEmailNotifyRequest.class
+com\saga\dto\enums\ActionType.class
+com\saga\dto\enums\EmailType.class
+com\saga\dto\request\InventoryAdapterRequest.class
+com\saga\dto\request\EmailNotify.class
+com\saga\dto\request\CreateSmsNotifyRequest.class
+com\saga\dto\enums\NotifyType.class
+com\saga\dto\request\CreateOutboxEventRequest.class
 com\saga\dto\request\CreateOrderRequest.class
 com\saga\dto\request\CreateOrderRequest$CreateOrderDetailRequest.class
+com\saga\dto\enums\NotifyStatus.class
+com\saga\dto\enums\SmsType.class
+com\saga\dto\request\TransactionAdapterRequest.class
+com\saga\dto\request\EmailNotify$EmailNotifyBuilder.class
+com\saga\dto\request\SmsNotify.class

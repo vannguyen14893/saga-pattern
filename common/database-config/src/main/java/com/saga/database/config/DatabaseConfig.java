@@ -8,15 +8,23 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.AuditorAware;
 
 import javax.sql.DataSource;
-@EnableConfigurationProperties({DatabaseConfigProperties.class})
+import java.util.Optional;
 
+@EnableConfigurationProperties({DatabaseConfigProperties.class})
 public interface DatabaseConfig {
+    @Bean
+    default AuditorAware<Long> auditorAware() {
+        return () -> Optional.of(1L);
+    }
+
     @Bean
     default DatabaseConfigProperties databaseConfigProperties() {
         return new DatabaseConfigProperties();
     }
+
     @Bean
     @ConditionalOnBean(DatabaseConfigProperties.class)
     @ConditionalOnExpression("'${database.enable}'=='true'")

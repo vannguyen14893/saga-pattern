@@ -1,7 +1,14 @@
+com\saga\exceptions\annotaions\password\PasswordValueMatch$List.class
+com\saga\exceptions\annotaions\password\ValidPassword.class
 com\saga\exceptions\utils\Languages.class
 com\saga\exceptions\config\ValidatorConfig.class
+com\saga\exceptions\annotaions\password\PasswordValueMatch.class
+com\saga\exceptions\annotaions\email\EmailConstraintValidator.class
+com\saga\exceptions\annotaions\phone\PhoneConstraintValidator.class
+com\saga\exceptions\annotaions\email\ValidEmail.class
+com\saga\exceptions\annotaions\password\PasswordConstraintValidator.class
 com\saga\exceptions\exceptions\CustomGlobalExceptionHandler.class
 com\saga\exceptions\exceptions\NotFoundExceptionHandler.class
-com\saga\exceptions\annotaions\ValidEmail.class
 com\saga\exceptions\config\DBMessageSourceConfig.class
-com\saga\exceptions\annotaions\EmailConstraintValidator.class
+com\saga\exceptions\annotaions\password\PasswordValueMatchValidator.class
+com\saga\exceptions\annotaions\phone\ValidPhone.class

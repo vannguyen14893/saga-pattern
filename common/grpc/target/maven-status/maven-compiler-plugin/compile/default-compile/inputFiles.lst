@@ -1,10 +1,16 @@
 E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\grpc-java\org\saga\grpc\proto\InventoryGrpc.java
+E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\grpc-java\org\saga\grpc\proto\OutBoxEventGrpc.java
 E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\grpc-java\org\springframework\grpc\sample\proto\SimpleGrpc.java
 E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\saga\grpc\proto\CheckInventoryRequest.java
 E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\saga\grpc\proto\CheckInventoryRequestOrBuilder.java
 E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\saga\grpc\proto\CheckInventoryResponse.java
 E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\saga\grpc\proto\CheckInventoryResponseOrBuilder.java
 E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\saga\grpc\proto\InventoryProto.java
+E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\saga\grpc\proto\OutboxEventProto.java
+E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\saga\grpc\proto\OutBoxEventRequest.java
+E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\saga\grpc\proto\OutBoxEventRequestOrBuilder.java
+E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\saga\grpc\proto\OutBoxEventResponse.java
+E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\saga\grpc\proto\OutBoxEventResponseOrBuilder.java
 E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\springframework\grpc\sample\proto\HelloReply.java
 E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\springframework\grpc\sample\proto\HelloReplyOrBuilder.java
 E:\1\saga-pattern\common\grpc\target\generated-sources\protobuf\java\org\springframework\grpc\sample\proto\HelloRequest.java

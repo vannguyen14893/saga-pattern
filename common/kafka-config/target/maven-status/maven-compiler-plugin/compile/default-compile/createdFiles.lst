@@ -1,3 +1,3 @@
-com\saga\response\config\KafkaConfig.class
-com\saga\response\dto\KafkaConfigProperties.class
 META-INF\spring-configuration-metadata.json
+com\saga\kafka\config\KafkaConfig.class
+com\saga\kafka\dto\KafkaConfigProperties.class

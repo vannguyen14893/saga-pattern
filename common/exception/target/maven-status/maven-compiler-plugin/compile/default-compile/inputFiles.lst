@@ -1,5 +1,11 @@
-E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\annotaions\EmailConstraintValidator.java
-E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\annotaions\ValidEmail.java
+E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\annotaions\email\EmailConstraintValidator.java
+E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\annotaions\email\ValidEmail.java
+E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\annotaions\password\PasswordConstraintValidator.java
+E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\annotaions\password\PasswordValueMatch.java
+E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\annotaions\password\PasswordValueMatchValidator.java
+E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\annotaions\password\ValidPassword.java
+E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\annotaions\phone\PhoneConstraintValidator.java
+E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\annotaions\phone\ValidPhone.java
 E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\config\DBMessageSourceConfig.java
 E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\config\ValidatorConfig.java
 E:\1\saga-pattern\common\exception\src\main\java\com\saga\exceptions\exceptions\CustomGlobalExceptionHandler.java

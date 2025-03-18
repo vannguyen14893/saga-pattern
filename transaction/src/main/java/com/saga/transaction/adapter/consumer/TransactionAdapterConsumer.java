@@ -1,7 +1,7 @@
 package com.saga.transaction.adapter.consumer;
 
 import com.google.gson.Gson;
-import com.saga.transaction.adapter.dto.request.TransactionAdapterRequest;
+import com.saga.dto.request.TransactionAdapterRequest;
 import com.saga.transaction.entity.Transaction;
 import com.saga.transaction.service.TransactionService;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 public class TransactionAdapterConsumer {
     private final TransactionService transactionService;
 
-    @KafkaListener(topics = "transaction", groupId = "transaction")
+    @KafkaListener(topics = "transaction", groupId = "${kafka.group-id}")
     public void receive(String payload) {
         TransactionAdapterRequest transactionAdapterRequest = new Gson().fromJson(payload, TransactionAdapterRequest.class);
         Transaction transaction = new Transaction();

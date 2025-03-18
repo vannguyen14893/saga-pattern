@@ -1,5 +1,6 @@
 package com.saga.order.entity;
 
+import com.saga.database.config.AuditTable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +17,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class Order extends AuditTable {
     @Id
     private String id;
     private String code;

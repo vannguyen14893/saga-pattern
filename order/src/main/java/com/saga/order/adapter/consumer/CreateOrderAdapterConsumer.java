@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class CreateOrderAdapterConsumer {
     private final OrderService orderService;
 
-    @KafkaListener(topics = "order", groupId = "saga")
+    @KafkaListener(topics = "order", groupId = "${kafka.group-id}")
     public void create(String payload) {
         CreateOrderRequest createOrderRequest = new Gson().fromJson(payload, CreateOrderRequest.class);
         orderService.create(createOrderRequest);

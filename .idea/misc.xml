@@ -30,6 +30,7 @@
         <option value="$PROJECT_DIR$/common/kafka-config/pom.xml" />
         <option value="$PROJECT_DIR$/common/grpc/pom.xml" />
         <option value="$PROJECT_DIR$/common/dto/pom.xml" />
+        <option value="$PROJECT_DIR$/common/security/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

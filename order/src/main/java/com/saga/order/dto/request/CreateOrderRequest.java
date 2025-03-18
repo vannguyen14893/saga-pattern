@@ -1,7 +1,7 @@
 package com.saga.order.dto.request;
 
 
-import com.saga.exceptions.annotaions.ValidEmail;
+import com.saga.exceptions.annotaions.email.ValidEmail;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;

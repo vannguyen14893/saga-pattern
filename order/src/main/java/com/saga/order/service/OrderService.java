@@ -23,7 +23,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final ConfirmCreateOrderAdapterProducer confirmCreateOrderAdapterProducer;
 
-    public List<Order> list() {
+    public List<Order> findAll() {
         return orderRepository.findAll();
     }
 

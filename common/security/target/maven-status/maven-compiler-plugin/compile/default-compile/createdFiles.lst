@@ -1,0 +1,3 @@
+com\saga\security\config\SecurityResourceConfig.class
+META-INF\spring-configuration-metadata.json
+com\saga\security\dto\SecurityConfigProperties.class

@@ -1,6 +1,7 @@
 package com.example.authorzation.service;
 
 import com.example.authorzation.entity.User;
+import com.example.authorzation.exceptions.UserDetailNotFound;
 import org.springframework.security.core.userdetails.UserCache;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class CustomUserDetailCache implements UserCache {
     public UserDetails getUserFromCache(String username) {
         User user = userDetails.get(username);
         if (user == null) {
-            throw new NullPointerException("user_not_found");
+            throw new UserDetailNotFound("user_not_found");
         }
         return user;
     }

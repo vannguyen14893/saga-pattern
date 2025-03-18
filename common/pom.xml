@@ -20,6 +20,7 @@
         <module>base-response</module>
         <module>grpc</module>
         <module>dto</module>
+        <module>security</module>
     </modules>
     <properties>
         <java.version>21</java.version>

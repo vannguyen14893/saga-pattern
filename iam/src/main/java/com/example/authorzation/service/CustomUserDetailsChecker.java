@@ -1,5 +1,6 @@
 package com.example.authorzation.service;
 
+import com.example.authorzation.exceptions.AccountStatusExceptionHandler;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsChecker;
 import org.springframework.stereotype.Service;
@@ -10,13 +11,13 @@ public class CustomUserDetailsChecker implements UserDetailsChecker {
     @Override
     public void check(UserDetails toCheck) {
         if (!toCheck.isEnabled()) {
-            throw new RuntimeException("enable");
+            throw new AccountStatusExceptionHandler("enable");
         }
         if (!toCheck.isAccountNonExpired()) {
-            throw new RuntimeException("expired");
+            throw new AccountStatusExceptionHandler("expired");
         }
         if (!toCheck.isAccountNonLocked()) {
-            throw new RuntimeException("locked");
+            throw new AccountStatusExceptionHandler("locked");
         }
     }
 }

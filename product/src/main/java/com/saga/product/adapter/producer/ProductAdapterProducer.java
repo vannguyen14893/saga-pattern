@@ -1,8 +1,8 @@
 package com.saga.product.adapter.producer;
 
 import com.google.gson.Gson;
-import com.saga.product.adapter.dto.InventoryAdapterRequest;
-import com.saga.product.enums.ActionType;
+import com.saga.dto.enums.ActionType;
+import com.saga.dto.request.InventoryAdapterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;

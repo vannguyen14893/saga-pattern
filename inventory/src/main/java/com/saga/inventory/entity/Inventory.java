@@ -1,5 +1,6 @@
 package com.saga.inventory.entity;
 
+import com.saga.database.config.AuditTable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -14,7 +15,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Inventory {
+public class Inventory extends AuditTable {
     @Id
     private Long productId;
     private int quantity;

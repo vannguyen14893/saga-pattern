@@ -1,0 +1,54 @@
+{
+  "groups": [
+    {
+      "name": "security",
+      "type": "com.saga.security.dto.SecurityConfigProperties",
+      "sourceType": "com.saga.security.dto.SecurityConfigProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "security.add-mapping",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SecurityConfigProperties"
+    },
+    {
+      "name": "security.allow-credentials",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.saga.security.dto.SecurityConfigProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "security.allowed-headers",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.saga.security.dto.SecurityConfigProperties"
+    },
+    {
+      "name": "security.allowed-methods",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.saga.security.dto.SecurityConfigProperties"
+    },
+    {
+      "name": "security.allowed-origins",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SecurityConfigProperties"
+    },
+    {
+      "name": "security.issuer-uri",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SecurityConfigProperties"
+    },
+    {
+      "name": "security.max-age",
+      "type": "java.lang.Long",
+      "sourceType": "com.saga.security.dto.SecurityConfigProperties",
+      "defaultValue": 0
+    },
+    {
+      "name": "security.permit-all",
+      "type": "java.lang.String[]",
+      "sourceType": "com.saga.security.dto.SecurityConfigProperties"
+    }
+  ],
+  "hints": []
+}
