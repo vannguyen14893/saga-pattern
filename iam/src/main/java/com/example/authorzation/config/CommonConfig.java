@@ -1,6 +1,6 @@
 package com.example.authorzation.config;
 
-import com.example.authorzation.exceptions.AccountStatusExceptionHandler;
+import com.example.authorzation.exceptions.AuthenticationExceptionHandler;
 import com.example.authorzation.exceptions.UserDetailNotFound;
 import com.saga.database.config.DatabaseConfig;
 import com.saga.exceptions.config.DBMessageSourceConfig;
@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Slf4j
 public class CommonConfig extends CustomGlobalExceptionHandler implements DatabaseConfig {
 
-    @ExceptionHandler({AccountStatusExceptionHandler.class})
-    public ResponseEntity<ResponseError<String>> userLockedException(final AccountStatusExceptionHandler ex) {
+    @ExceptionHandler({AuthenticationExceptionHandler.class})
+    public ResponseEntity<ResponseError<String>>  accountStatusException(final AuthenticationExceptionHandler ex) {
         log.info(ex.getClass().getName());
         return execute(HttpStatus.UNAUTHORIZED.value(), String.format(new DBMessageSourceConfig().getMessages("403"), ex.getMessage()));
     }

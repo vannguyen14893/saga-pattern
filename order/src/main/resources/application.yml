@@ -26,3 +26,6 @@ server:
 kafka:
   boot-strap-server: "localhost:29092"
   group-id: "saga"
+  properties-consumer:
+    isolation.level: "read_committed"
+  batch-listener: "false"

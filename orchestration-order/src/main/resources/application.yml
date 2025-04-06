@@ -8,6 +8,8 @@ spring:
 kafka:
   boot-strap-server: "localhost:29092"
   group-id: "orchestration"
+  properties-consumer:
+    transaction-id-prefix: tx-
 security:
   add-mapping: "/**"
   allowed-headers:
@@ -33,3 +35,7 @@ grpc:
       negotiation-type: plaintext
 server:
   port: 8086
+logging:
+  level:
+    org.springframework.transaction: trace
+    org.springframework.kafka.transaction: debug

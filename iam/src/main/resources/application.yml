@@ -4,6 +4,10 @@ spring:
     generate-ddl: true
     show-sql: false
     open-in-view: off
+  web:
+    resources:
+      add-mappings: true
+      static-locations: classpath:/static/
 database:
   enable: true
   url: "jdbc:mysql://localhost:3306/iam"
@@ -25,6 +29,7 @@ server:
   servlet:
     session:
       timeout: 10m
+      tracking-modes: cookie
       cookie:
         http-only: true
         secure: true

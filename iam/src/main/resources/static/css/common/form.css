@@ -1,0 +1,31 @@
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.message-error {
+    color: red;
+}
+
+.group-label {
+    display: flex;
+}
+
+.icon-required {
+    margin-left: 5px;
+    color: red;
+}

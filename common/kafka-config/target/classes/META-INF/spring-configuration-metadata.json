@@ -8,6 +8,12 @@
   ],
   "properties": [
     {
+      "name": "kafka.batch-listener",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.saga.kafka.dto.KafkaConfigProperties",
+      "defaultValue": false
+    },
+    {
       "name": "kafka.boot-strap-server",
       "type": "java.lang.String",
       "sourceType": "com.saga.kafka.dto.KafkaConfigProperties"

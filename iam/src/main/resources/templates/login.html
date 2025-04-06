@@ -2,126 +2,59 @@
 <head>
     <title>Đăng nhập</title>
 </head>
-<link href="/css/bootstrap.min.css" rel="stylesheet">
-<style>
-    .form-login {
-        width: 1000px;
-        height: auto;
-        margin: 150px;
-        position: relative;
-    }
+<link rel="stylesheet" th:href="@{/css/common/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/login.css}">
+<link rel="stylesheet" th:href="@{/css/common/alert.css}">
+<link rel="stylesheet" th:href="@{/css/common/form.css}">
+<link rel="stylesheet" th:href="@{/css/common/button.css}">
 
-    .input-login {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        margin: -100px 0 0 0;
-        width: 350px;
-        height: auto;
-    }
-
-    .styleText {
-        text-align: center;
-    }
-
-    .group-input {
-        margin-top: 10px;
-    }
-
-    .center-separator {
-        display: flex;
-        line-height: 1em;
-        color: gray;
-        text-align: center;
-    }
-
-    .center-separator::before, .center-separator::after {
-        content: '';
-        display: inline-block;
-        flex-grow: 1;
-        margin-top: 0.5em;
-        background: gray;
-        height: 1px;
-        margin-right: 10px;
-        margin-left: 10px;
-    }
-
-    .icon-required {
-        color: red;
-        margin-left: 4px;
-        font-size: 18px;
-    }
-</style>
 <body>
-
-<form th:action="@{/login}" method="post">
-    <div class="form-login">
-        <div class="input-login">
-            <div th:if="${message}!=null">
-                <p class="alert alert-danger" role="alert" th:text="${message}"></p>
-            </div>
-            <div th:if="${message_success}!=null">
-                <p class="alert alert-success" role="alert" th:text="${message_success}"></p>
-            </div>
-            <div class="row g-2 group-input">
-                <div class="col-12 ">
-                    <div class="row">
-                        <div class="col-12">
-                            <label for="phone">Số điện thoại</label>
-                            <span class="icon-required">*</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <input class="form-control" type="text" id="phone" name="phone" autofocus="autofocus"/>
-                </div>
-                <div class="col-12">
-                    <label for="password">Mật khẩu</label><span class="icon-required">*</span>
-                </div>
-                <div class="col-12">
-                    <input class="form-control" type="password" id="password" name="password"/>
-                </div>
-                <div class="col-12" style="text-align: end">
-                    <a th:href="@{/forgot-password}" }><p>Quên mật khẩu</p></a>
-                </div>
-                <div class="col-12">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="remember-me" id="flexCheckChecked"
-                               style="height: 20px;width: 20px;">
-                        <label class="form-check-label" for="flexCheckChecked" style="padding-left: 10px;">
-                            Ghi nhớ tài khoản
-                        </label>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <button class="btn btn-primary" style="width: 100%">Đăng nhập</button>
-                </div>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <!--                <div class="col-12 center-separator">-->
-                <!--                    <p>Hoặc</p>-->
-                <!--                    <div class="col-12 ">-->
-                <!--                        <a th:href="@{/oauth2/authorization/google-idp}"><p>Đăng nhập với Google</p></a>-->
-                <!--                    </div>-->
-                <!--                    <div class="col-12 ">-->
-                <!--                        <a th:href="@{/oauth2/authorization/google-idp}">-->
-                <!--                            <p>Đăng nhập với Facebook</p></a>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-            </div>
-        </div>
+<div class="login-container">
+    <div class="alert-error" th:if="${message}!=null">
+        <p th:text="${message}"></p>
+        <button class="alert-close" onclick="this.parentElement.style.display='none'">&times;</button>
     </div>
-</form>
+    <div class="alert-success" th:if="${message_success}!=null">
+        <p th:text="${message_success}"></p>
+        <button class="alert-close" onclick="this.parentElement.style.display='none'">&times;</button>
+    </div>
+    <form class="login-form" th:action="@{/login}" method="post">
+        <div class="form-group">
+            <div class="group-label">
+                <label for="phone">Số điện thoại</label>
+                <p class="icon-required">*</p></div>
+            <input type="tel" id="phone" name="phone" class="form-control">
+        </div>
 
-<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
-<!--        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"-->
-<!--        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"-->
-<!--        crossorigin="anonymous"></script>-->
-<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"-->
-<!--        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"-->
-<!--        crossorigin="anonymous"></script>-->
-<script src="/static/js/bootstrap.bundle.min.js"></script>
+        <div class="form-group">
+            <div class="group-label">
+                <label for="password">Mật khẩu </label>
+                <p class="icon-required">*</p>
+            </div>
+            <input type="password" id="password" name="password" class="form-control">
+        </div>
+        <div class="form-options">
+            <div class="checkbox-group">
+                <input type="checkbox" id="show-password" class="checkbox">
+                <label for="remember">Hiện mật khẩu</label>
+            </div>
+            <a th:href="@{/forgot-password}">Quên mật khẩu?</a>
+        </div>
+        <div class="remember-me">
+            <input type="checkbox" id="remember" class="checkbox">
+            <label for="remember">Ghi nhớ tài khoản</label>
+        </div>
 
+        <button class="button">Đăng nhập</button>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    </form>
+</div>
+<script th:href="@{/js/bootstrap.bundle.min.js}"></script>
+<script>
+    document.getElementById('show-password').addEventListener('change', function () {
+        const passwordInput = document.getElementById('password');
+        passwordInput.type = this.checked ? 'text' : 'password';
+    });
+</script>
 </body>
 </html>

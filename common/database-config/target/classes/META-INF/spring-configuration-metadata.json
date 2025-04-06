@@ -10,8 +10,7 @@
     {
       "name": "database.auto-commit",
       "type": "java.lang.Boolean",
-      "sourceType": "com.saga.database.dto.DatabaseConfigProperties",
-      "defaultValue": false
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
     },
     {
       "name": "database.driver",
@@ -21,20 +20,17 @@
     {
       "name": "database.enable",
       "type": "java.lang.Boolean",
-      "sourceType": "com.saga.database.dto.DatabaseConfigProperties",
-      "defaultValue": true
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
     },
     {
       "name": "database.max-pool-size",
       "type": "java.lang.Integer",
-      "sourceType": "com.saga.database.dto.DatabaseConfigProperties",
-      "defaultValue": 0
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
     },
     {
       "name": "database.min-pool-size",
       "type": "java.lang.Integer",
-      "sourceType": "com.saga.database.dto.DatabaseConfigProperties",
-      "defaultValue": 0
+      "sourceType": "com.saga.database.dto.DatabaseConfigProperties"
     },
     {
       "name": "database.password",

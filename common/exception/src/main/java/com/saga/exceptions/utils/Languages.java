@@ -16,6 +16,7 @@ public class Languages {
         messages.put("expired","Tài khoản đã bị hết hạn");
         messages.put("AbstractUserDetailsAuthenticationProvider.badCredentials","password_valid");
         messages.put("password_valid","Mật khẩu không đúng");
+        messages.put("message.badCredentials","Mật khẩu không đúng");
         messages.put("max_session","Tài khoản này đã được đăng nhập từ một thiết bị khác!");
         messages.put("session_expired","Phiên đăng nhập hết hạn");
         messages.put("user_not_found","Tài khoản không tồn tại");
@@ -31,6 +32,9 @@ public class Languages {
         messages.put("forgot_password_success","Nếu địa chỉ email của bạn tồn tại trong cơ sở dữ liệu của chúng tôi, bạn sẽ nhận được liên kết khôi phục mật khẩu tại địa chỉ email của mình sau vài phút.");
         messages.put("404", "%s không tồn tại!");
         messages.put("403", "Tài khoản của bạn không có quyền truy cập!");
+        messages.put("token_not_found", "Token không tồn tại!");
+        messages.put("token_expired", "Token hết hạn!");
+        messages.put("save_password_success","Thay đổi mật khẩu thành công");
         return messages.get(key);
     }
 }

@@ -28,10 +28,11 @@ public class RegisteredClientConfig {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .redirectUri("https://oidcdebugger.com/debug")
+                .redirectUri("http://localhost:3000/callback")
+                .postLogoutRedirectUri("http://localhost:3000")
                 .scope(OidcScopes.OPENID)
-                .tokenSettings(tokenSettings())
                 .scope(OidcScopes.PROFILE)
+                .tokenSettings(tokenSettings())
                 .build();
         return new InMemoryRegisteredClientRepository(oidcClient);
     }
