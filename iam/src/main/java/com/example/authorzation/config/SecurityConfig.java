@@ -85,7 +85,7 @@ public class SecurityConfig {
         http.rememberMe(rememberMe -> rememberMe.rememberMeServices(rememberMeConfig.rememberMeServices(customUserDetailService)));
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .sessionFixation().newSession()
-                .maximumSessions(9)
+                .maximumSessions(-1)
                 .maxSessionsPreventsLogin(true));
         return http.build();
     }

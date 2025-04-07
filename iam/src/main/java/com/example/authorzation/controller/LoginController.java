@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+
 @Controller
 @RequiredArgsConstructor
 @Slf4j
@@ -25,7 +27,8 @@ public class LoginController {
 
 
     @RequestMapping("/hello")
-    public String hello() {
+    public String hello(Principal principal, Model model) {
+        model.addAttribute("username", "Hello " + principal.getName());
         return "test";
     }
 
