@@ -11,5 +11,4 @@ public class AuthenticationExceptionHandler extends AccountStatusException {
     public AuthenticationExceptionHandler(String msg, Throwable cause) {
         super(msg, cause);
     }
-    {}
 }

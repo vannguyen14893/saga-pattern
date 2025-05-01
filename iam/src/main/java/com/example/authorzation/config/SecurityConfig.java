@@ -1,6 +1,8 @@
 package com.example.authorzation.config;
 
+import com.example.authorzation.service.CustomUserDetailCache;
 import com.example.authorzation.service.CustomUserDetailService;
+import com.example.authorzation.service.OneTimeTokenService;
 import com.saga.exceptions.config.DBMessageSourceConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +16,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationConsentService;
+import org.springframework.security.oauth2.server.authorization.OAuth2AuthorizationService;
+import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.web.SecurityFilterChain;
@@ -31,6 +37,13 @@ public class SecurityConfig {
     private final CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
     private final AuthenticationCustomProvider authenticationCustomProvider;
     private final CustomUserDetailService customUserDetailService;
+    private final AuthenticationCustomGrantTypePasswordProvider customGrantTypePasswordProvider;
+    private final RegisteredClientRepository registeredClientRepository;
+    private final OAuth2AuthorizationService oAuth2AuthorizationService;
+    private final OAuth2AuthorizationConsentService oAuth2AuthorizationConsentService;
+    private final PasswordEncoder passwordEncoder;
+    private final OneTimeTokenService oneTimeTokenService;
+    private final CustomUserDetailCache customUserDetailCache;
 
     @Bean
     @Order(1)
@@ -38,14 +51,26 @@ public class SecurityConfig {
             throws Exception {
         http.cors(withDefaults());
         http.csrf(AbstractHttpConfigurer::disable);
-        http.exceptionHandling((exceptions) -> exceptions.defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login"), new MediaTypeRequestMatcher(MediaType.TEXT_HTML)))
-                .oauth2ResourceServer((resourceServer) -> resourceServer.jwt(withDefaults()));
+        http.exceptionHandling((exceptions) -> exceptions
+                .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login"), new MediaTypeRequestMatcher(MediaType.TEXT_HTML)));
+        http.oauth2ResourceServer((resourceServer) -> resourceServer.jwt(withDefaults()));
         OAuth2AuthorizationServerConfigurer authorizationServerConfigurer = new OAuth2AuthorizationServerConfigurer();
+        // Get the default endpoint matcher for the token endpoint
         http.securityMatcher(authorizationServerConfigurer.getEndpointsMatcher())
                 .with(authorizationServerConfigurer, (authorizationServer) ->
-                        authorizationServer.oidc(withDefaults()))
+                        authorizationServer.oidc(withDefaults())
+                                .registeredClientRepository(registeredClientRepository)
+                                .authorizationService(oAuth2AuthorizationService)
+                                .authorizationServerSettings(authorizationServerSettings())
+                                .authorizationConsentService(oAuth2AuthorizationConsentService))
                 .authorizeHttpRequests((authorize) ->
-                        authorize.anyRequest().authenticated());
+                        authorize.requestMatchers("custom/token/**").permitAll()
+                                .anyRequest().authenticated());
+//        authorizationServerConfigurer
+//                .tokenEndpoint(tokenEndpoint ->
+//                        tokenEndpoint
+//                                .accessTokenRequestConverters(converters -> converters.add(new CustomPasswordAuthenticationConverter(registeredClientRepository, customUserDetailCache, passwordEncoder, oneTimeTokenService)))
+//                                .authenticationProviders(providers -> providers.add(customGrantTypePasswordProvider)));
         return http.build();
     }
 
@@ -67,6 +92,7 @@ public class SecurityConfig {
                                 "/static/**",
                                 "/public/**",
                                 "/favicon.ico",
+                                "/custom/token/**",
                                 "test/**").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(login -> login
@@ -90,10 +116,9 @@ public class SecurityConfig {
         return http.build();
     }
 
-
 //    @Bean
 //    public WebSecurityCustomizer webSecurityCustomizer() {
-//        return (web) -> web.ignoring().requestMatchers("/static/**", "/css/**", "/js/**", "test/**");
+//        return (web) -> web.ignoring().requestMatchers("/oauth2/token/**");
 //    }
 
     @Bean
@@ -111,3 +136,4 @@ public class SecurityConfig {
         return providerManager;
     }
 }
+

@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.oauth2.jwt.JwtDecoders;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -50,8 +51,13 @@ public interface SecurityResourceConfig {
                 .authorizeHttpRequests(auth -> auth.requestMatchers(securityConfig.getPermitAll())
                         .permitAll().anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt -> jwt.decoder(JwtDecoders.fromIssuerLocation(securityConfig.getIssuerUri()))))
+                        .jwt(jwt -> jwt.decoder(jwtDecoder(securityConfig))))
                 .build();
     }
-
+    @Bean
+    default NimbusJwtDecoder jwtDecoder(SecurityConfigProperties securityConfig) {
+        NimbusJwtDecoder jwtDecoder = JwtDecoders.fromIssuerLocation(securityConfig.getIssuerUri());
+        jwtDecoder.setJwtValidator(new CustomAccessTokenValidator());
+        return jwtDecoder;
+    }
 }

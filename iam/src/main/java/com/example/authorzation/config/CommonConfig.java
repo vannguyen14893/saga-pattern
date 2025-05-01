@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class CommonConfig extends CustomGlobalExceptionHandler implements DatabaseConfig {
 
     @ExceptionHandler({AuthenticationExceptionHandler.class})
-    public ResponseEntity<ResponseError<String>>  accountStatusException(final AuthenticationExceptionHandler ex) {
+    public ResponseEntity<ResponseError<String>> accountStatusException(final AuthenticationExceptionHandler ex) {
         log.info(ex.getClass().getName());
         return execute(HttpStatus.UNAUTHORIZED.value(), String.format(new DBMessageSourceConfig().getMessages("403"), ex.getMessage()));
     }

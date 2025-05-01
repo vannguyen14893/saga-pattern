@@ -8,13 +8,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.oauth2.core.oidc.OidcIdToken;
-import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Map;
 
 @Entity
 @Table
@@ -23,7 +19,7 @@ import java.util.Map;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Builder
-public class User implements UserDetails, OidcUser {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,10 +42,6 @@ public class User implements UserDetails, OidcUser {
 //        isAccountNonLocked = (!accountNonLocked && !getLastFailedLoginDate().plusSeconds(900).isBefore(LocalDateTime.now()));
 //    }
 
-    @Override
-    public Map<String, Object> getAttributes() {
-        return null;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -70,23 +62,4 @@ public class User implements UserDetails, OidcUser {
         this.isAccountNonExpired = isAccountNonExpired;
     }
 
-    @Override
-    public Map<String, Object> getClaims() {
-        return null;
-    }
-
-    @Override
-    public OidcUserInfo getUserInfo() {
-        return null;
-    }
-
-    @Override
-    public OidcIdToken getIdToken() {
-        return null;
-    }
-
-    @Override
-    public String getName() {
-        return null;
-    }
 }

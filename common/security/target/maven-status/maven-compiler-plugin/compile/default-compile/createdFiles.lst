@@ -1,3 +1,4 @@
+com\saga\security\config\CustomAccessTokenValidator.class
+com\saga\security\dto\SecurityConfigProperties.class
 com\saga\security\config\SecurityResourceConfig.class
 META-INF\spring-configuration-metadata.json
-com\saga\security\dto\SecurityConfigProperties.class
