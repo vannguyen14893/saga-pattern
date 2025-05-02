@@ -36,6 +36,9 @@ public class User implements UserDetails {
     private boolean isEnabled;
     private boolean isAccountNonExpired;
     private String language = "vi";
+    private Integer otp;
+    private LocalDateTime otpExpireDate;
+    private String multifactorAuthenticationType;
     private String avatar;
 
 //    public void setAccountNonLocked(boolean accountNonLocked) {

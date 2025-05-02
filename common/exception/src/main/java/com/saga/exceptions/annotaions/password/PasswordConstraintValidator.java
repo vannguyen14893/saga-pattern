@@ -3,6 +3,7 @@ package com.saga.exceptions.annotaions.password;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.passay.*;
+import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 
@@ -14,7 +15,7 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
 
     @Override
     public boolean isValid(String password, ConstraintValidatorContext context) {
-        if (password != null) {
+        if (StringUtils.hasText(password)) {
             PasswordValidator validator = new PasswordValidator(Arrays.asList(
                     // length between 8 and 100 characters
                     new LengthRule(8, 256),

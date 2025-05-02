@@ -5,17 +5,13 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
-import io.jsonwebtoken.Jwts;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-import java.time.Instant;
-import java.util.Date;
 import java.util.UUID;
 
 @Configuration
@@ -43,16 +39,5 @@ public class JWKSourceConfig {
             throw new IllegalStateException(ex);
         }
         return keyPair;
-    }
-
-    public String generateAccessToken(RegisteredClient registeredClient, Instant issuedAt, Instant expiresAt) {
-        return Jwts.builder()
-                .subject(registeredClient.getClientId())
-                .issuer("http://localhost:8088")
-                .expiration(new Date(expiresAt.toEpochMilli()))
-                .issuedAt(new Date(issuedAt.toEpochMilli()))
-                .claim("custom_claim", "custom_value")
-                .signWith(generateRsaKey().getPrivate())
-                .compact();
     }
 }

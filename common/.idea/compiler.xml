@@ -8,14 +8,19 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="exception" />
+        <module name="base-response" />
+        <module name="security" />
         <module name="schedulers" />
+        <module name="kafka-config" />
         <module name="client" />
+        <module name="database-config" />
+        <module name="dto" />
+        <module name="grpc" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="annotations" target="17" />
       <module name="config" target="17" />
-      <module name="dto" target="17" />
       <module name="enums" target="17" />
       <module name="utils" target="17" />
     </bytecodeTargetLevel>
@@ -23,12 +28,17 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="annotations" options="-parameters" />
+      <module name="base-response" options="-parameters" />
       <module name="client" options="-parameters" />
       <module name="config" options="-parameters" />
+      <module name="database-config" options="-parameters" />
       <module name="dto" options="-parameters" />
       <module name="enums" options="-parameters" />
       <module name="exception" options="-parameters" />
+      <module name="grpc" options="-parameters" />
+      <module name="kafka-config" options="-parameters" />
       <module name="schedulers" options="-parameters" />
+      <module name="security" options="-parameters" />
       <module name="utils" options="-parameters" />
     </option>
   </component>

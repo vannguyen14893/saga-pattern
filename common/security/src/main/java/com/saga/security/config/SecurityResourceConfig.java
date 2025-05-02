@@ -9,12 +9,17 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 @EnableWebSecurity
 @Configuration
@@ -25,6 +30,7 @@ public interface SecurityResourceConfig {
     default SecurityConfigProperties securityConfig() {
         return new SecurityConfigProperties();
     }
+
     @Bean
     default WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().requestMatchers("/resources/**", "/static/**");
@@ -51,13 +57,26 @@ public interface SecurityResourceConfig {
                 .authorizeHttpRequests(auth -> auth.requestMatchers(securityConfig.getPermitAll())
                         .permitAll().anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
-                        .jwt(jwt -> jwt.decoder(jwtDecoder(securityConfig))))
+                        .jwt(jwt -> jwt.decoder(jwtDecoder(securityConfig))
+                                .jwtAuthenticationConverter(customJwtConverter())))
                 .build();
     }
+
     @Bean
     default NimbusJwtDecoder jwtDecoder(SecurityConfigProperties securityConfig) {
         NimbusJwtDecoder jwtDecoder = JwtDecoders.fromIssuerLocation(securityConfig.getIssuerUri());
         jwtDecoder.setJwtValidator(new CustomAccessTokenValidator());
         return jwtDecoder;
+    }
+
+    private JwtAuthenticationConverter customJwtConverter() {
+        JwtAuthenticationConverter converter = new JwtAuthenticationConverter();
+        converter.setJwtGrantedAuthoritiesConverter(jwt -> {
+            Collection<String> scopes = jwt.getClaim("scope");
+            return scopes.stream()
+                    .map(scope -> new SimpleGrantedAuthority("SCOPE_" + scope))
+                    .collect(Collectors.toList());
+        });
+        return converter;
     }
 }

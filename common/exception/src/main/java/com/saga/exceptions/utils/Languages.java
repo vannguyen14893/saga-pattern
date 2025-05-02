@@ -35,6 +35,12 @@ public class Languages {
         messages.put("token_not_found", "Token không tồn tại!");
         messages.put("token_expired", "Token hết hạn!");
         messages.put("save_password_success","Thay đổi mật khẩu thành công");
+        messages.put("clientId.not.blank", "ClientId không được để trống");
+        messages.put("clientSecret.not.blank", "Client Secret không được để trống");
+        messages.put("grantType.not.blank", "Grant type không được để trống");
+        messages.put("grant_types_not_found","Grant type không tồn tại");
+        messages.put("otp_invalid","Mã otp không hợp lệ");
+        messages.put("otp_expired","Mã otp hết hạn");
         return messages.get(key);
     }
 }

@@ -5,7 +5,9 @@ com\saga\exceptions\config\ValidatorConfig.class
 com\saga\exceptions\annotaions\password\PasswordValueMatch.class
 com\saga\exceptions\annotaions\email\EmailConstraintValidator.class
 com\saga\exceptions\annotaions\phone\PhoneConstraintValidator.class
+com\saga\exceptions\annotaions\otp\ValidOtp.class
 com\saga\exceptions\annotaions\email\ValidEmail.class
+com\saga\exceptions\annotaions\otp\OtpConstraintValidator.class
 com\saga\exceptions\annotaions\password\PasswordConstraintValidator.class
 com\saga\exceptions\exceptions\CustomGlobalExceptionHandler.class
 com\saga\exceptions\exceptions\NotFoundExceptionHandler.class

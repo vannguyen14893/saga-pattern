@@ -15,7 +15,7 @@ import java.time.Instant;
 import java.util.Set;
 
 @Entity
-@Table
+@Table()
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

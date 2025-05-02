@@ -1,6 +1,7 @@
 package com.example.authorzation.config;
 
 import com.example.authorzation.exceptions.AuthenticationExceptionHandler;
+import com.example.authorzation.exceptions.BusinessExceptionHandler;
 import com.example.authorzation.exceptions.UserDetailNotFound;
 import com.saga.database.config.DatabaseConfig;
 import com.saga.exceptions.config.DBMessageSourceConfig;
@@ -28,5 +29,11 @@ public class CommonConfig extends CustomGlobalExceptionHandler implements Databa
     protected ResponseEntity<ResponseError<String>> userNotFoundExceptionHandler(final UserDetailNotFound ex) {
         log.info(ex.getClass().getName());
         return execute(404, String.format(new DBMessageSourceConfig().getMessages("404"), ex.getMessage()));
+    }
+
+    @ExceptionHandler({BusinessExceptionHandler.class})
+    protected ResponseEntity<ResponseError<String>> businessExceptionHandler(final BusinessExceptionHandler ex) {
+        log.info(ex.getClass().getName());
+        return execute(400, new DBMessageSourceConfig().getMessages(ex.getMessage()));
     }
 }
