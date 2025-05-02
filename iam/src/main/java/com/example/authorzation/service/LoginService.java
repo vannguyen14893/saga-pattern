@@ -43,7 +43,7 @@ public class LoginService {
             if (Strings.hasText(loginPasswordRequest.password())
                     && passwordEncoder.matches(loginPasswordRequest.password(), userDetails.getPassword())) {
                 loginSuccess(loginPasswordRequest.username());
-                String otp = multifactorAuthenticationType ? otpService.createOtp(userDetails) : googleAuthenticatorService.generateQRUrl(userDetails);
+                String otp = multifactorAuthenticationType ? otpService.createOtp(userDetails) : googleAuthenticatorService.generateQRUrl(googleAuthenticatorService.generateKey(),userDetails.getUsername());
                 return new LoginSuccessResponse(null, null, null, null, null, null, otp);
             } else if (!userDetails.isEnabled()) {
                 oneTimeTokenService.validateToken(loginPasswordRequest.password(), loginPasswordRequest.username());
