@@ -1,3 +1,4 @@
+com\saga\dto\enums\CustomGrantType.class
 com\saga\dto\request\CreateEmailNotifyRequest.class
 com\saga\dto\enums\ActionType.class
 com\saga\dto\enums\EmailType.class

@@ -10,20 +10,21 @@
         <module name="exception" />
         <module name="base-response" />
         <module name="security" />
+        <module name="languages" />
         <module name="kafka-config" />
         <module name="database-config" />
         <module name="dto" />
         <module name="grpc" />
       </profile>
-      <profile name="Annotation profile for iam" enabled="true">
+      <profile name="Annotation profile for orchestraion-order" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.36/lombok-1.18.36.jar" />
         </processorPath>
-        <module name="orchestration-order" />
         <module name="delivery" />
+        <module name="orchestration-order" />
         <module name="product" />
         <module name="admin" />
         <module name="inventory" />
@@ -61,6 +62,7 @@
       <module name="iam" options="-parameters" />
       <module name="inventory" options="-parameters" />
       <module name="kafka-config" options="-parameters" />
+      <module name="languages" options="-parameters" />
       <module name="orchestration-notify" options="-parameters" />
       <module name="orchestration-order" options="-parameters" />
       <module name="order" options="-parameters" />

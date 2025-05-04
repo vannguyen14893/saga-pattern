@@ -32,7 +32,8 @@ public class GenTokenService {
     private final OAuth2AuthorizationService authorizationService;
     private final AuthorizationServerSettings authorizationServerSettings;
 
-    public OAuth2AccessTokenAuthenticationToken generateToken(RegisteredClient registeredClient, UsernamePasswordAuthenticationToken authentication, String grantType, String username) {
+    public OAuth2AccessTokenAuthenticationToken generateToken(RegisteredClient registeredClient, UsernamePasswordAuthenticationToken authentication,
+                                                              String grantType, String username,OAuth2TokenType tokenType) {
         OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization
                 .withRegisteredClient(registeredClient)
                 .principalName(authentication.getName())
@@ -68,7 +69,6 @@ public class GenTokenService {
                 generatedAccessToken.getIssuedAt(),
                 generatedAccessToken.getExpiresAt(),
                 tokenContext.getAuthorizedScopes());
-
         authorizationBuilder.token(accessToken);
         // Generate refresh token if supported
         if (registeredClient.getAuthorizationGrantTypes().contains(AuthorizationGrantType.REFRESH_TOKEN)) {

@@ -7,7 +7,7 @@ import com.saga.exceptions.annotaions.password.ValidPassword;
 import com.saga.exceptions.annotaions.phone.ValidPhone;
 import jakarta.validation.constraints.NotBlank;
 
-//@ValidOtp(password = "password", otp = "otp")
+@ValidOtp(password = "password", otp = "otp")
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public record LoginPasswordRequest(
 

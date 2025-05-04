@@ -57,8 +57,9 @@ public class RegisteredClientConfig {
                 // Add standard claims
                 context.getClaims()
                         .issuer(context.getAuthorizationServerContext().getIssuer())
+                        .claim("grant_type", context.getAuthorizationGrantType().getValue())
+                        .claim("token_type", "Bearer")
                         .claim("version", "1.0");
-
                 // Add custom claims from authentication
                 Authentication principal = context.getPrincipal();
                 if (principal instanceof OAuth2ClientAuthenticationToken) {

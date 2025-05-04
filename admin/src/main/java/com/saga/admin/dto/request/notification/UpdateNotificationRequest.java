@@ -1,4 +1,4 @@
-package com.saga.admin.dto.request;
+package com.saga.admin.dto.request.notification;
 
 import java.util.Date;
 

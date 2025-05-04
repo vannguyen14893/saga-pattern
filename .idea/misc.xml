@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
@@ -30,6 +31,7 @@
         <option value="$PROJECT_DIR$/common/grpc/pom.xml" />
         <option value="$PROJECT_DIR$/common/dto/pom.xml" />
         <option value="$PROJECT_DIR$/common/security/pom.xml" />
+        <option value="$PROJECT_DIR$/languages/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">

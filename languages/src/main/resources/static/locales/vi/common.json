@@ -1,0 +1,10 @@
+{
+  "welcome": "Chào mừng đến với ứng dụng của chúng tôi!",
+  "buttons": {
+    "submit": "Gửi",
+    "cancel": "Hủy"
+  },
+  "login": {
+    "button": "Đăng nhập"
+  }
+}

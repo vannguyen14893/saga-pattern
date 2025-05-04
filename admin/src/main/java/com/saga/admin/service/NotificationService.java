@@ -1,7 +1,7 @@
 package com.saga.admin.service;
 
-import com.saga.admin.dto.request.CreateNotificationRequest;
-import com.saga.admin.dto.request.UpdateNotificationRequest;
+import com.saga.admin.dto.request.notification.CreateNotificationRequest;
+import com.saga.admin.dto.request.notification.UpdateNotificationRequest;
 import com.saga.admin.entity.Notification;
 import com.saga.admin.repository.NotificationRepository;
 import com.saga.exceptions.exceptions.NotFoundExceptionHandler;

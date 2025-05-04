@@ -10,6 +10,7 @@ import java.util.Set;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public record LoginSuccessResponse(String accessToken, String refreshToken, Long expiresAt, String tokenType,
-                                   Map<String, Object> additionalParameters, Set<String> scopes, String otp) {
+                                   Map<String, Object> additionalParameters, Set<String> scopes, String otp,
+                                   String typeAuthentication) {
 
 }

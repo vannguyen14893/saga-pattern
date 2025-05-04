@@ -26,6 +26,8 @@ import java.util.stream.Collectors;
 @EnableMethodSecurity
 @EnableConfigurationProperties({SecurityConfigProperties.class})
 public interface SecurityResourceConfig {
+
+
     @Bean
     default SecurityConfigProperties securityConfig() {
         return new SecurityConfigProperties();
@@ -57,6 +59,7 @@ public interface SecurityResourceConfig {
                 .authorizeHttpRequests(auth -> auth.requestMatchers(securityConfig.getPermitAll())
                         .permitAll().anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
+                        .authenticationEntryPoint(new CustomBearerTokenAuthenticationEntryPoint())
                         .jwt(jwt -> jwt.decoder(jwtDecoder(securityConfig))
                                 .jwtAuthenticationConverter(customJwtConverter())))
                 .build();
