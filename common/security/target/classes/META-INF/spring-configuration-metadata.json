@@ -1,12 +1,77 @@
 {
   "groups": [
     {
+      "name": "saga.swagger",
+      "type": "com.saga.security.dto.SwaggerConfigProperties",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
+    {
       "name": "security",
       "type": "com.saga.security.dto.SecurityConfigProperties",
       "sourceType": "com.saga.security.dto.SecurityConfigProperties"
     }
   ],
   "properties": [
+    {
+      "name": "saga.swagger.bearer-format",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
+    {
+      "name": "saga.swagger.description",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
+    {
+      "name": "saga.swagger.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
+    {
+      "name": "saga.swagger.license-name",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
+    {
+      "name": "saga.swagger.license-url",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
+    {
+      "name": "saga.swagger.list-server",
+      "type": "java.lang.String[]",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
+    {
+      "name": "saga.swagger.security-scheme",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
+    {
+      "name": "saga.swagger.security-type",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
+    {
+      "name": "saga.swagger.terms-of-service",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
+    {
+      "name": "saga.swagger.title",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
+    {
+      "name": "saga.swagger.token-type",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
+    {
+      "name": "saga.swagger.version",
+      "type": "java.lang.String",
+      "sourceType": "com.saga.security.dto.SwaggerConfigProperties"
+    },
     {
       "name": "security.add-mapping",
       "type": "java.lang.String",
@@ -15,8 +80,7 @@
     {
       "name": "security.allow-credentials",
       "type": "java.lang.Boolean",
-      "sourceType": "com.saga.security.dto.SecurityConfigProperties",
-      "defaultValue": false
+      "sourceType": "com.saga.security.dto.SecurityConfigProperties"
     },
     {
       "name": "security.allowed-headers",
@@ -41,8 +105,7 @@
     {
       "name": "security.max-age",
       "type": "java.lang.Long",
-      "sourceType": "com.saga.security.dto.SecurityConfigProperties",
-      "defaultValue": 0
+      "sourceType": "com.saga.security.dto.SecurityConfigProperties"
     },
     {
       "name": "security.permit-all",

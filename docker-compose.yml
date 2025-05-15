@@ -22,5 +22,20 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+  db:
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    restart: always
+    environment:
+      - MYSQL_DATABASE=demo
+      - MYSQL_ROOT_PASSWORD=123456aA@
+    ports:
+      - '3306:3306'
+    volumes:
+      - db:/var/lib/mysql
+volumes:
+  db:
+    driver: local
 
 

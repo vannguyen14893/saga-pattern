@@ -18,7 +18,5 @@ public class Translate {
     private Long id;
     private String translation;
     private String languageCode;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id")
-    private Menu menu;
+    private String type;
 }

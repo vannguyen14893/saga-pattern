@@ -1,7 +1,7 @@
 package com.saga.security.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.saga.response.dto.ResponseError;
+import com.saga.dto.response.ResponseError;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;

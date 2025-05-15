@@ -28,7 +28,7 @@ public class IamApplication {
 //        User user = new User();
 //        user.setEmail("ducvan14894@gmail.com");
 //        user.setPassword(passwordEncoder.encode("123456a@"));
-//        user.setPhone("1234567890");
+//        user.setPhone("1234567891");
 //        user.setFullName("ndvan");
 //        user.setAccountNonExpired(true);
 //        user.setCredentialsNonExpired(true);

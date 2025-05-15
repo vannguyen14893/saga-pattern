@@ -1,6 +1,7 @@
 package com.saga.security.config;
 
 import com.saga.security.dto.SecurityConfigProperties;
+import com.saga.security.dto.SwaggerConfigProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
@@ -24,18 +26,25 @@ import java.util.stream.Collectors;
 @EnableWebSecurity
 @Configuration
 @EnableMethodSecurity
-@EnableConfigurationProperties({SecurityConfigProperties.class})
+@EnableConfigurationProperties({SecurityConfigProperties.class, SwaggerConfigProperties.class})
 public interface SecurityResourceConfig {
-
 
     @Bean
     default SecurityConfigProperties securityConfig() {
         return new SecurityConfigProperties();
     }
 
+
     @Bean
     default WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/resources/**", "/static/**");
+        return (web) -> web.ignoring().requestMatchers(
+                "/swagger-ui.html",
+                "/swagger-ui/**",
+                "/v3/api-docs/**",
+                "/swagger-resources/**",
+                "/webjars/**",
+                "/resources/**",
+                "/static/**");
     }
 
     @Bean
@@ -56,6 +65,7 @@ public interface SecurityResourceConfig {
     @ConditionalOnBean(value = {CorsConfigurationSource.class, SecurityConfigProperties.class})
     default SecurityFilterChain securityFilter(HttpSecurity http, SecurityConfigProperties securityConfig) throws Exception {
         return http
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth.requestMatchers(securityConfig.getPermitAll())
                         .permitAll().anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2
@@ -68,7 +78,7 @@ public interface SecurityResourceConfig {
     @Bean
     default NimbusJwtDecoder jwtDecoder(SecurityConfigProperties securityConfig) {
         NimbusJwtDecoder jwtDecoder = JwtDecoders.fromIssuerLocation(securityConfig.getIssuerUri());
-        jwtDecoder.setJwtValidator(new CustomAccessTokenValidator());
+        //jwtDecoder.setJwtValidator(new CustomAccessTokenValidator());
         return jwtDecoder;
     }
 

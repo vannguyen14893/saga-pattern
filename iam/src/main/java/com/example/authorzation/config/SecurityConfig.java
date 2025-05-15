@@ -64,7 +64,12 @@ public class SecurityConfig {
                                 .authorizationServerSettings(authorizationServerSettings())
                                 .authorizationConsentService(oAuth2AuthorizationConsentService))
                 .authorizeHttpRequests((authorize) ->
-                        authorize.requestMatchers("custom/token/**").permitAll()
+                        authorize.requestMatchers("custom/token/**",
+                                         "/swagger-ui.html",
+                                        "/swagger-ui/**",
+                                        "/v3/api-docs/**",
+                                        "/swagger-resources/**",
+                                        "/webjars/**").permitAll()
                                 .anyRequest().authenticated());
 //        authorizationServerConfigurer
 //                .tokenEndpoint(tokenEndpoint ->
@@ -83,6 +88,12 @@ public class SecurityConfig {
         //http.oneTimeTokenLogin(withDefaults());
         http.authorizeHttpRequests((authorize) -> authorize.requestMatchers(
                                 "/login*",
+                                "/oauth2/token/**",
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**",
                                 "/forgot-password/**",
                                 "/hello-public",
                                 "/css/**",
@@ -99,7 +110,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("phone")
                         .failureHandler(customAuthenticationFailureHandler)
-                        .defaultSuccessUrl("/hello", true)
+                       // .defaultSuccessUrl("/hello", true)
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
