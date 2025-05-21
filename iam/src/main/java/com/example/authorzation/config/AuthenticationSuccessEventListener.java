@@ -7,6 +7,12 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
 
+/**
+ * Listener component that handles successful authentication events.
+ * This listener is triggered when a user successfully authenticates,
+ * and logs the successful login attempt. It can be extended to track
+ * successful logins through the LoginService.
+ */
 @Component
 @Slf4j
 @RequiredArgsConstructor

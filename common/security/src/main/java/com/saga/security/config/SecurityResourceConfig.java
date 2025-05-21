@@ -23,6 +23,18 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+/**
+ * Configuration class for Spring Security in a resource server setup using OAuth2.
+ * This interface provides default security configurations including:
+ * - Web security customization for Swagger UI and API documentation endpoints
+ * - CORS configuration based on security properties
+ * - JWT-based OAuth2 resource server configuration
+ * - Custom JWT decoder and authentication converter
+ * <p>
+ * The class uses Spring Security's new configuration style with component-based security
+ * and method-level security enabled. It configures security filters, CORS policies,
+ * and JWT token handling for OAuth2 resource server implementation.
+ */
 @EnableWebSecurity
 @Configuration
 @EnableMethodSecurity

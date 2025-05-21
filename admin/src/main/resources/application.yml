@@ -7,9 +7,9 @@ spring:
     allow-bean-definition-overriding: true
 database:
   enable: true
-  url: "jdbc:mysql://localhost:3306/admin"
+  url: "jdbc:mysql://localhost:3306/iam"
   username: "root"
-  password: "123456"
+  password: "123456aA@"
   driver: "com.mysql.cj.jdbc.Driver"
   type: "com.zaxxer.hikari.HikariDataSource"
   auto-commit: true
@@ -31,3 +31,31 @@ kafka:
   group-id: "admin"
   properties-consumer:
     max.poll.records: 1000
+springdoc:
+  api-docs:
+    enabled: true
+    #path: /disable
+  swagger-ui:
+    enabled: true
+  writer-with-order-by-keys: true
+saga:
+  swagger:
+    list-server: [ "http://localhost:9000,Server swagger localhost" ]
+    description: Admin api
+    license-name: "Saga license"
+security:
+  add-mapping: "/**"
+  allowed-headers:
+    - "*"
+  allowed-origins: "http://localhost:3000,http://localhost:3001"
+  allow-credentials: true
+  issuer-uri: "http://localhost:8088"
+  max-age: 600
+  permit-all: ["*"]
+  allowed-methods:
+    - "GET"
+    - "POST"
+    - "PUT"
+    - "DELETE"
+    - "PATH"
+    - "OPTIONS"

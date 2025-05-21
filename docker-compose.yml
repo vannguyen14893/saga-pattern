@@ -1,41 +1,59 @@
-version: '2'
+#version: '2'
+#services:
+#  zookeeper:
+#    image: confluentinc/cp-zookeeper
+#    environment:
+#      ZOOKEEPER_CLIENT_PORT: 2181
+#      ZOOKEEPER_TICK_TIME: 2000
+#    ports:
+#      - 22181:2181
+#
+#  kafka:
+#    image: confluentinc/cp-kafka
+#    depends_on:
+#      - zookeeper
+#    ports:
+#      - 29092:29092
+#    environment:
+#      KAFKA_BROKER_ID: 1
+#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
+#      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+#      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+#  db:
+#    image: mysql:8.0
+#    cap_add:
+#      - SYS_NICE
+#    restart: always
+#    environment:
+#      - MYSQL_DATABASE=demo
+#      - MYSQL_ROOT_PASSWORD=123456aA@
+#    ports:
+#      - '3306:3306'
+#    volumes:
+#      - db:/var/lib/mysql
+#volumes:
+#  db:
+#    driver: local
+#
+#
+version: '3.8'
+
 services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
+  redoc:
+    image: redocly/redoc
+    container_name: redoc-docs
     ports:
-      - 22181:2181
-
-  kafka:
-    image: confluentinc/cp-kafka
-    depends_on:
-      - zookeeper
-    ports:
-      - 29092:29092
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
-  db:
-    image: mysql:8.0
-    cap_add:
-      - SYS_NICE
-    restart: always
-    environment:
-      - MYSQL_DATABASE=demo
-      - MYSQL_ROOT_PASSWORD=123456aA@
-    ports:
-      - '3306:3306'
+      - "8080:80"
     volumes:
-      - db:/var/lib/mysql
-volumes:
-  db:
-    driver: local
-
+      - ./json/openapi.json:/usr/share/nginx/html/openapi.json
+    environment:
+      - SPEC_URL=/openapi.json
+      - REDOC_OPTIONS=disableSearch=true,hideDownloadButton=true
+    command: >
+      sh -c "
+      chmod 644 /usr/share/nginx/html/openapi.json &&
+      /docker-entrypoint.sh nginx -g 'daemon off;'"
 

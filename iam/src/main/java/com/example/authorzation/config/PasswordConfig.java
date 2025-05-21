@@ -9,8 +9,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Configuration class for password encoding setup.
+ * Provides beans for password hashing and validation using BCrypt algorithm.
+ */
 @Configuration
 public class PasswordConfig {
+    /**
+     * Creates a PasswordEncoder bean configured with BCrypt algorithm.
+     * Uses a work factor of 12 for BCrypt hashing strength.
+     *
+     * @return DelegatingPasswordEncoder that defaults to BCrypt encoding
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         Map<String, PasswordEncoder> encoders = new HashMap<>();

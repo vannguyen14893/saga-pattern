@@ -28,6 +28,10 @@ import org.springframework.security.web.util.matcher.MediaTypeRequestMatcher;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
+/**
+ * Security configuration class that sets up authentication and authorization for the application.
+ * Configures OAuth2 authorization server, web security, authentication providers and other security-related beans.
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -45,6 +49,14 @@ public class SecurityConfig {
     private final OneTimeTokenService oneTimeTokenService;
     private final CustomUserDetailCache customUserDetailCache;
 
+    /**
+     * Configures the security filter chain for the OAuth2 authorization server.
+     * Sets up endpoints, authentication, and authorization rules for OAuth2 operations.
+     *
+     * @param http the HttpSecurity to configure
+     * @return the configured SecurityFilterChain
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     @Order(1)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
@@ -79,6 +91,14 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /**
+     * Configures the default security filter chain for web security.
+     * Sets up authentication, authorization, session management, and remember-me functionality.
+     *
+     * @param http the HttpSecurity to configure
+     * @return the configured SecurityFilterChain
+     * @throws Exception if an error occurs during configuration
+     */
     @Bean
     @Order(2)
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
@@ -132,6 +152,11 @@ public class SecurityConfig {
 //        return (web) -> web.ignoring().requestMatchers("/oauth2/token/**");
 //    }
 
+    /**
+     * Creates authorization server settings with the configured issuer URL.
+     *
+     * @return AuthorizationServerSettings configured with issuer URL
+     */
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder()
@@ -139,6 +164,11 @@ public class SecurityConfig {
                 .build();
     }
 
+    /**
+     * Creates and configures the authentication manager with custom provider and event publisher.
+     *
+     * @return configured AuthenticationManager instance
+     */
     @Bean
     public AuthenticationManager authenticationManager() {
         ProviderManager providerManager = new ProviderManager(authenticationCustomProvider);

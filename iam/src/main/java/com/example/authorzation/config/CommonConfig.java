@@ -18,6 +18,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+/**
+ * Configuration class that handles global exception management for the authorization system.
+ * Extends CustomGlobalExceptionHandler and implements DatabaseConfig to provide centralized
+ * exception handling for authentication, user-related, and business logic exceptions.
+ * <p>
+ * This class is responsible for:
+ * - Managing authentication exceptions (403)
+ * - Handling user not found scenarios (404)
+ * - Processing business logic exceptions (400)
+ * - Providing standardized error responses using ResponseError format
+ */
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 @Slf4j
@@ -36,7 +47,7 @@ public class CommonConfig extends CustomGlobalExceptionHandler implements Databa
     })
     public ResponseEntity<ResponseError<String>> accountStatusException(final AuthenticationExceptionHandler ex) {
         log.info(ex.getClass().getName());
-        return execute(HttpStatus.UNAUTHORIZED.value(), String.format(new DBMessageSourceConfig().getMessages("403"), ex.getMessage()));
+        return execute(String.valueOf(HttpStatus.UNAUTHORIZED.value()), String.format(new DBMessageSourceConfig().getMessages("403"), ex.getMessage()));
     }
 
     @ExceptionHandler({UserDetailNotFound.class})
@@ -52,7 +63,7 @@ public class CommonConfig extends CustomGlobalExceptionHandler implements Databa
     })
     protected ResponseEntity<ResponseError<String>> userNotFoundExceptionHandler(final UserDetailNotFound ex) {
         log.info(ex.getClass().getName());
-        return execute(404, String.format(new DBMessageSourceConfig().getMessages("404"), ex.getMessage()));
+        return execute("404", String.format(new DBMessageSourceConfig().getMessages("404"), ex.getMessage()));
     }
 
     @ExceptionHandler({BusinessExceptionHandler.class})
@@ -68,6 +79,6 @@ public class CommonConfig extends CustomGlobalExceptionHandler implements Databa
     })
     protected ResponseEntity<ResponseError<String>> businessExceptionHandler(final BusinessExceptionHandler ex) {
         log.info(ex.getClass().getName());
-        return execute(400, new DBMessageSourceConfig().getMessages(ex.getMessage()));
+        return execute("400", new DBMessageSourceConfig().getMessages(ex.getMessage()));
     }
 }

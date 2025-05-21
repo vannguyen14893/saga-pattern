@@ -7,11 +7,20 @@ import org.springframework.util.StringUtils;
 import java.lang.reflect.Field;
 import java.util.Objects;
 
+/**
+ * Validator class that implements validation logic for OTP (One-Time Password) constraints.
+ * This validator ensures that OTP field contains valid data when password is not provided.
+ */
 public class OtpConstraintValidator implements ConstraintValidator<ValidOtp, Object> {
     private String password;
     private String otp;
     private String message;
 
+    /**
+     * Initializes the validator with constraint annotation data.
+     *
+     * @param arg0 the annotation instance containing validation rules
+     */
     @Override
     public void initialize(ValidOtp arg0) {
         this.password = arg0.password();
@@ -19,6 +28,13 @@ public class OtpConstraintValidator implements ConstraintValidator<ValidOtp, Obj
         message = arg0.message();
     }
 
+    /**
+     * Validates that when password is not provided, OTP must be present and exactly 6 characters long.
+     *
+     * @param value   object to validate
+     * @param context context in which the constraint is evaluated
+     * @return true if validation passes, false otherwise
+     */
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
         try {
@@ -49,6 +65,14 @@ public class OtpConstraintValidator implements ConstraintValidator<ValidOtp, Obj
         return true;
     }
 
+    /**
+     * Retrieves field value from an object using reflection.
+     *
+     * @param object    the object to get field value from
+     * @param fieldName name of the field to retrieve
+     * @return value of the specified field
+     * @throws Exception if field access fails
+     */
     private Object getFieldValue(Object object, String fieldName) throws Exception {
         Field field = object.getClass().getDeclaredField(fieldName);
         field.setAccessible(true);

@@ -12,7 +12,23 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Custom validator for OAuth2 JWT access tokens.
+ * Performs validation of essential token claims and properties including:
+ * - Issuer validation
+ * - Token expiration
+ * - Token type verification
+ * - Required claims presence (user_id)
+ * - Grant type validation
+ * - Optional IP address validation
+ */
 public class CustomAccessTokenValidator implements OAuth2TokenValidator<Jwt> {
+    /**
+     * Validates the JWT token against multiple criteria.
+     *
+     * @param jwt The JWT token to validate
+     * @return OAuth2TokenValidatorResult indicating success or containing validation errors
+     */
     @Override
     public OAuth2TokenValidatorResult validate(Jwt jwt) {
         List<OAuth2Error> errors = new ArrayList<>();
@@ -54,6 +70,13 @@ public class CustomAccessTokenValidator implements OAuth2TokenValidator<Jwt> {
                 OAuth2TokenValidatorResult.failure(errors);
     }
 
+    /**
+     * Validates the token's expiration time.
+     * Checks if expiration claim exists and if the token hasn't expired.
+     *
+     * @param jwt    The JWT token to validate
+     * @param errors List to collect validation errors
+     */
     private void validateExpiration(Jwt jwt, List<OAuth2Error> errors) {
         if (jwt.getExpiresAt() == null) {
             errors.add(new CustomOAuth2Error(
@@ -70,6 +93,13 @@ public class CustomAccessTokenValidator implements OAuth2TokenValidator<Jwt> {
         }
     }
 
+    /**
+     * Validates the token's issuer.
+     * Ensures the token was issued by an authorized party.
+     *
+     * @param jwt    The JWT token to validate
+     * @param errors List to collect validation errors
+     */
     private void validateIssuer(Jwt jwt, List<OAuth2Error> errors) {
         if (!"http://localhost:8088".equals(jwt.getClaimAsString("iss"))) {
             errors.add(new CustomOAuth2Error(
@@ -79,6 +109,14 @@ public class CustomAccessTokenValidator implements OAuth2TokenValidator<Jwt> {
             ));
         }
     }
+
+    /**
+     * Validates the token type claim.
+     * Ensures the token is of type "Bearer".
+     *
+     * @param jwt    The JWT token to validate
+     * @param errors List to collect validation errors
+     */
     private void validateTokenType(Jwt jwt, List<OAuth2Error> errors) {
         String tokenType = jwt.getClaim("token_type");
         if (!"Bearer".equals(tokenType)) {
@@ -89,6 +127,14 @@ public class CustomAccessTokenValidator implements OAuth2TokenValidator<Jwt> {
             ));
         }
     }
+
+    /**
+     * Validates IP address format using regex pattern.
+     * Accepts IPv4 addresses in standard dot-decimal notation.
+     *
+     * @param ip The IP address string to validate
+     * @return true if the IP address is valid, false otherwise
+     */
     private boolean isValidIp(String ip) {
         // Implement IP validation logic
         return ip != null && ip.matches("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}$");

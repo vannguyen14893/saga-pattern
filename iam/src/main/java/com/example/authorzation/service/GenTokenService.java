@@ -24,14 +24,40 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Service class responsible for generating OAuth2 access and refresh tokens.
+ * This service handles token generation, authorization building, and token persistence
+ * for the OAuth2 authorization flow.
+ */
 @RequiredArgsConstructor
 @Service
 public class GenTokenService {
 
+    /**
+     * Generator for creating OAuth2 tokens
+     */
     private final OAuth2TokenGenerator<?> tokenGenerator;
+
+    /**
+     * Service for managing OAuth2 authorizations
+     */
     private final OAuth2AuthorizationService authorizationService;
+
+    /**
+     * Settings for the authorization server configuration
+     */
     private final AuthorizationServerSettings authorizationServerSettings;
 
+    /**
+     * Generates OAuth2 access and refresh tokens for a given client and authentication.
+     *
+     * @param registeredClient The registered OAuth2 client requesting the token
+     * @param authentication   The authentication token containing user credentials
+     * @param grantType        The OAuth2 grant type being used
+     * @param username         The username of the authenticating user
+     * @param tokenType        The type of token to generate
+     * @return OAuth2AccessTokenAuthenticationToken containing the generated access and refresh tokens
+     */
     public OAuth2AccessTokenAuthenticationToken generateToken(RegisteredClient registeredClient, UsernamePasswordAuthenticationToken authentication,
                                                               String grantType, String username,OAuth2TokenType tokenType) {
         OAuth2Authorization.Builder authorizationBuilder = OAuth2Authorization

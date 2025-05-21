@@ -14,8 +14,18 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 
+/**
+ * Configuration class for JSON Web Key (JWK) source setup.
+ * Provides beans for JWT signing and validation using RSA key pairs.
+ */
 @Configuration
 public class JWKSourceConfig {
+    /**
+     * Creates a JWKSource bean containing an RSA key pair for JWT signing and validation.
+     * Generates a new key pair and builds an immutable JWK set.
+     *
+     * @return JWKSource containing RSA key pair
+     */
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
         KeyPair keyPair = generateRsaKey();
@@ -29,6 +39,12 @@ public class JWKSourceConfig {
         return new ImmutableJWKSet<>(jwkSet);
     }
 
+    /**
+     * Generates a new RSA key pair with 2048-bit key size.
+     *
+     * @return KeyPair containing RSA public and private keys
+     * @throws IllegalStateException if key pair generation fails
+     */
     private static KeyPair generateRsaKey() {
         KeyPair keyPair;
         try {

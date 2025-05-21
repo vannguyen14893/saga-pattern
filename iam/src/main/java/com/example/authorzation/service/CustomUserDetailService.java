@@ -7,6 +7,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
+/**
+ * Custom implementation of Spring Security's UserDetailsService.
+ * This service handles user authentication by loading user details from a cache
+ * and performing additional validation checks. If a user is not found in the cache,
+ * it throws an AuthenticationExceptionHandler.
+ * <p>
+ * The service uses:
+ * - CustomUserDetailCache for retrieving cached user information
+ * - CustomUserDetailsChecker for additional validation of user details
+ */
+
 @Service
 @Slf4j
 @RequiredArgsConstructor

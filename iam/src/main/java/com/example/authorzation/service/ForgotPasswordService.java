@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -23,6 +24,7 @@ public class ForgotPasswordService {
     //private final SendMailService sendMailService;
     private final PasswordEncoder passwordEncoder;
 
+    @Transactional
     public PasswordResetToken create(String email) {
         User user = userRepository.findByEmail(email);
         if (user == null) {
@@ -38,7 +40,12 @@ public class ForgotPasswordService {
         //sendMailService.sendMailForgotPassword(email, token);
         return save;
     }
+
+    @Transactional
     public User save(ChangePasswordRequest changePasswordRequest) {
+        if (changePasswordRequest == null || changePasswordRequest.getToken() == null) {
+            throw new IllegalArgumentException("Token cannot be null");
+        }
         PasswordResetToken passwordResetToken = passwordResetTokenRepository.findByToken(changePasswordRequest.getToken());
         User user = userRepository.findById(passwordResetToken.getUserId()).orElseThrow(() -> new NotFoundExceptionHandler("404"));
         user.setPassword(passwordEncoder.encode(changePasswordRequest.getPasswordNew()));
@@ -46,6 +53,8 @@ public class ForgotPasswordService {
         passwordResetTokenRepository.delete(passwordResetToken);
         return user;
     }
+
+    @Transactional(readOnly = true)
     public String validatePasswordResetToken(String token) {
         PasswordResetToken passToken = passwordResetTokenRepository.findByToken(token);
         return !isTokenFound(passToken) ? "invalid_token"

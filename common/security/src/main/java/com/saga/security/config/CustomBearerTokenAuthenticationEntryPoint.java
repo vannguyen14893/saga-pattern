@@ -16,7 +16,20 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/**
+ * Custom implementation of AuthenticationEntryPoint for handling Bearer token authentication failures.
+ * Provides JSON formatted error responses for unauthorized access attempts and JWT validation failures.
+ */
 public class CustomBearerTokenAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    /**
+     * Handles authentication failures by returning a JSON formatted error response.
+     * For JWT validation failures, includes detailed validation errors in the response.
+     *
+     * @param request       The HTTP request that resulted in an AuthenticationException
+     * @param response      The HTTP response to be modified
+     * @param authException The exception that caused the invocation
+     * @throws IOException If an I/O error occurs while writing the response
+     */
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
@@ -43,7 +56,7 @@ public class CustomBearerTokenAuthenticationEntryPoint implements Authentication
         } else {
             message = authException.getMessage();
         }
-        responseError = new ResponseError<>(UUID.randomUUID().toString(), HttpStatus.UNAUTHORIZED.value(), message);
+        responseError = new ResponseError<>(UUID.randomUUID().toString(), String.valueOf(HttpStatus.UNAUTHORIZED.value()), message);
 
         new ObjectMapper().writeValue(response.getOutputStream(), responseError);
     }

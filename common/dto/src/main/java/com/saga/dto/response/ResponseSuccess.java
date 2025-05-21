@@ -8,7 +8,7 @@ public record ResponseSuccess<T>(
         String id,
 
         @Schema(description = "HTTP status code", example = "200")
-        int status,
+        String status,
 
         @Schema(description = "Response message", example = "Operation completed successfully")
         String message,

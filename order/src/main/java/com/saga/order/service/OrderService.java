@@ -17,20 +17,42 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Service class handling order-related business operations including creation, retrieval,
+ * and status management of orders.
+ */
 @Service
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
     private final ConfirmCreateOrderAdapterProducer confirmCreateOrderAdapterProducer;
 
+    /**
+     * Retrieves all orders from the repository.
+     *
+     * @return List of all orders
+     */
     public List<Order> findAll() {
         return orderRepository.findAll();
     }
 
+    /**
+     * Finds an order by its ID.
+     *
+     * @param orderId the ID of the order to find
+     * @return the found order
+     * @throws NotFoundExceptionHandler if order is not found
+     */
     public Order findById(String orderId) {
         return orderRepository.findById(orderId).orElseThrow(() -> new NotFoundExceptionHandler("order"));
     }
 
+    /**
+     * Creates a new order based on the provided request.
+     *
+     * @param createOrderRequest the request containing order details
+     * @return the created order
+     */
     public Order create(CreateOrderRequest createOrderRequest) {
         Order order = new Order();
         String orderId = createOrderRequest.orderId() != null ? createOrderRequest.orderId() : UUID
@@ -54,6 +76,13 @@ public class OrderService {
         return order;
     }
 
+    /**
+     * Updates an existing order with new details.
+     *
+     * @param updateOrderRequest the request containing updated order details
+     * @return the updated order
+     * @throws NotFoundExceptionHandler if order is not found
+     */
     public Order update(UpdateOrderRequest updateOrderRequest) {
         Order order = orderRepository.findById(updateOrderRequest.orderId()).orElseThrow(() -> new NotFoundExceptionHandler("order"));
         List<OrderDetail> orderDetails = new ArrayList<>();
@@ -69,6 +98,14 @@ public class OrderService {
         return order;
     }
 
+    /**
+     * Updates the status of an order.
+     *
+     * @param orderId the ID of the order to update
+     * @param status  the new status to set
+     * @return the ID of the updated order
+     * @throws NotFoundExceptionHandler if order is not found
+     */
     public String updateStatus(String orderId, String status) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new NotFoundExceptionHandler("order"));
         order.setStatus(status);
@@ -76,6 +113,14 @@ public class OrderService {
         return orderId;
     }
 
+    /**
+     * Converts order detail parameters into an OrderDetail entity.
+     *
+     * @param quantity  the quantity of the product
+     * @param productId the ID of the product
+     * @param order     the parent order
+     * @return the created OrderDetail entity
+     */
     private OrderDetail convert(int quantity, Long productId, Order order) {
         OrderDetail orderDetail = new OrderDetail();
         orderDetail.setOrder(order);

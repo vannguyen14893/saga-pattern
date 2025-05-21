@@ -25,6 +25,10 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Service class for handling Google Authenticator operations including TOTP generation,
+ * validation, and QR code creation for two-factor authentication.
+ */
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -35,6 +39,12 @@ public class GoogleAuthenticatorService {
     private final CustomUserDetailCache customUserDetailCache;
 
     // Generate a new TOTP key
+
+    /**
+     * Generates a new TOTP secret key using Google Authenticator.
+     *
+     * @return the generated secret key as a String
+     */
     public String generateKey() {
         GoogleAuthenticator gAuth = new GoogleAuthenticator();
         final GoogleAuthenticatorKey key = gAuth.createCredentials();
@@ -42,6 +52,15 @@ public class GoogleAuthenticatorService {
     }
 
     // Validate the TOTP code
+
+    /**
+     * Validates a TOTP code against a given secret.
+     *
+     * @param secret the secret key used for validation
+     * @param code   the TOTP code to validate
+     * @return the validated TOTP code as an Integer
+     * @throws BusinessExceptionHandler if the code is invalid
+     */
     public Integer isValid(String secret, String code) {
         GoogleAuthenticator gAuth = new GoogleAuthenticator(
                 new GoogleAuthenticatorConfig.GoogleAuthenticatorConfigBuilder().build());
@@ -54,6 +73,14 @@ public class GoogleAuthenticatorService {
     }
 
     // Generate a QR code URL for Google Authenticator
+
+    /**
+     * Generates a QR code URL for a user's Google Authenticator setup.
+     * If the user doesn't have a secret, generates one and saves it.
+     *
+     * @param user the user for whom to generate the QR code
+     * @return Base64 encoded QR code image string, or "0" if user already has a secret
+     */
     public String generateQRUrl(User user) {
         if (user.getSecret() == null) {
             String secret = generateKey();
@@ -70,6 +97,13 @@ public class GoogleAuthenticatorService {
     }
 
     // Generate a QR code image in Base64 format
+
+    /**
+     * Generates a Base64 encoded QR code image from the given text.
+     *
+     * @param qrCodeText the text to encode in the QR code
+     * @return Base64 encoded string of the QR code image, or null if generation fails
+     */
     public static String generateQRBase64(String qrCodeText) {
         try {
             QRCodeWriter qrCodeWriter = new QRCodeWriter();

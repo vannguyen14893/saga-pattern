@@ -15,6 +15,12 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.web.authentication.AuthenticationConverter;
 import org.springframework.util.StringUtils;
 
+/**
+ * Custom authentication converter for handling password-based authentication requests.
+ * This converter processes HTTP requests to extract authentication credentials and validates them
+ * against registered clients and user details. It supports both regular password authentication
+ * and one-time token validation for disabled users.
+ */
 @RequiredArgsConstructor
 public class CustomPasswordAuthenticationConverter implements AuthenticationConverter {
 
@@ -23,6 +29,18 @@ public class CustomPasswordAuthenticationConverter implements AuthenticationConv
     private final PasswordEncoder passwordEncoder;
     private final OneTimeTokenService oneTimeTokenService;
 
+    /**
+     * Converts an HTTP request into an Authentication object.
+     * This method:
+     * 1. Validates the client ID and grant type
+     * 2. Extracts username and password from the request
+     * 3. Validates the credentials against stored user details
+     * 4. Handles special case for disabled users with one-time tokens
+     *
+     * @param request the HTTP request containing authentication parameters
+     * @return CustomPasswordAuthenticationToken if authentication is successful
+     * @throws OAuth2AuthenticationException if validation fails for any reason
+     */
     @Override
     public Authentication convert(HttpServletRequest request) {
         String clientId = request.getParameter(OAuth2ParameterNames.CLIENT_ID);

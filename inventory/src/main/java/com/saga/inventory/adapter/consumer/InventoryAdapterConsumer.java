@@ -11,6 +11,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+/**
+ * Consumer service for handling inventory-related Kafka messages.
+ * Processes create, update, and delete operations for inventory management.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -18,6 +22,11 @@ public class InventoryAdapterConsumer {
     private final InventoryService inventoryService;
     private final InventoryAdapterProducer inventoryAdapterProducer;
 
+    /**
+     * Handles creation and deletion of inventory items based on product events.
+     *
+     * @param payload the JSON payload containing inventory adapter request
+     */
     @KafkaListener(topics = "product", groupId = "${kafka.group-id}")
     public void create(String payload) {
         InventoryAdapterRequest inventoryAdapterRequest = new Gson().fromJson(payload, InventoryAdapterRequest.class);
@@ -29,6 +38,11 @@ public class InventoryAdapterConsumer {
         }
     }
 
+    /**
+     * Processes inventory update requests and confirms the updates.
+     *
+     * @param payload the JSON payload containing inventory update request
+     */
     @KafkaListener(topics = "inventory", groupId = "${kafka.group-id}")
     public void update(String payload) {
         UpdateInventoryRequest updateInventoryRequests = new Gson().fromJson(payload, UpdateInventoryRequest.class);

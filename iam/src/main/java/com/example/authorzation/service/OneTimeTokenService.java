@@ -12,6 +12,10 @@ import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+/**
+ * Service class for managing one-time tokens used in user authentication and verification.
+ * Handles token generation, validation, and lifecycle management with secure random token creation.
+ */
 @RequiredArgsConstructor
 @Service
 public class OneTimeTokenService {
@@ -20,6 +24,12 @@ public class OneTimeTokenService {
     private static final int TOKEN_LENGTH = 16;
     private static final long TOKEN_VALIDITY_MINUTES = 10;
 
+    /**
+     * Generates a new one-time token for the specified username.
+     *
+     * @param username the username for which to generate the token
+     * @return the generated secure token string
+     */
     public String generateToken(String username) {
         String token = generateSecureToken();
         OneTimeTokenEntry oneTimeTokenEntry = new OneTimeTokenEntry(UUID.randomUUID().toString(), username, token, LocalDateTime.now());
@@ -27,6 +37,13 @@ public class OneTimeTokenService {
         return token;
     }
 
+    /**
+     * Validates the provided token for the given username and enables the associated user account.
+     *
+     * @param token    the token to validate
+     * @param username the username associated with the token
+     * @throws AuthenticationExceptionHandler if token is invalid or expired
+     */
     public void validateToken(String token, String username) {
         OneTimeTokenEntry oneTimeTokenEntry = oneTimeTokenEntryRepository.findByTokenAndUsername(token, username);
         if (oneTimeTokenEntry == null) throw new AuthenticationExceptionHandler("password.valid");
@@ -40,6 +57,11 @@ public class OneTimeTokenService {
         oneTimeTokenEntryRepository.delete(oneTimeTokenEntry);
     }
 
+    /**
+     * Generates a cryptographically secure random token string.
+     *
+     * @return a random string token of length TOKEN_LENGTH containing numbers and letters
+     */
     private String generateSecureToken() {
         SecureRandom random = new SecureRandom();
         StringBuilder token = new StringBuilder(TOKEN_LENGTH);

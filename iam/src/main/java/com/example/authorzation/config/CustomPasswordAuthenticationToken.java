@@ -6,6 +6,18 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 
 import java.util.Collections;
 
+/**
+ * Custom authentication token implementation for password-based authentication.
+ * Extends AbstractAuthenticationToken to provide additional functionality for
+ * handling password grants with custom parameters.
+ * <p>
+ * This token stores:
+ * - username: The user's identifier
+ * - password: The user's credentials
+ * - customParam: Additional custom parameter for authentication
+ * - registeredClient: The OAuth2 registered client information
+ * - grantType: The type of grant being processed
+ */
 @Getter
 public class CustomPasswordAuthenticationToken extends AbstractAuthenticationToken {
 

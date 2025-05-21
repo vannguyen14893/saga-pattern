@@ -13,18 +13,40 @@ import org.springframework.data.domain.AuditorAware;
 import javax.sql.DataSource;
 import java.util.Optional;
 
+/**
+ * Configuration class for database connection settings using HikariCP.
+ * Provides beans for database configuration and auditing functionality.
+ */
 @EnableConfigurationProperties({DatabaseConfigProperties.class})
 public interface DatabaseConfig {
+    /**
+     * Creates an AuditorAware bean that provides the current user ID for auditing.
+     * Currently returns a default value of 1L.
+     *
+     * @return AuditorAware instance that provides the user ID
+     */
     @Bean
     default AuditorAware<Long> auditorAware() {
         return () -> Optional.of(1L);
     }
 
+    /**
+     * Creates a DatabaseConfigProperties bean with default configuration values.
+     *
+     * @return DatabaseConfigProperties instance with default settings
+     */
     @Bean
     default DatabaseConfigProperties databaseConfigProperties() {
         return new DatabaseConfigProperties();
     }
 
+    /**
+     * Creates a HikariCP DataSource bean based on the provided configuration properties.
+     * Only created if database.enable is true and DatabaseConfigProperties bean exists.
+     *
+     * @param databaseConfigProperties Configuration properties for the database connection
+     * @return Configured HikariDataSource instance
+     */
     @Bean
     @ConditionalOnBean(DatabaseConfigProperties.class)
     @ConditionalOnExpression("'${database.enable}'=='true'")

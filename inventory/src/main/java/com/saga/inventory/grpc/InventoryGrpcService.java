@@ -18,6 +18,10 @@ import java.util.List;
 
 import static com.jayway.jsonpath.JsonPath.using;
 
+/**
+ * gRPC service implementation for inventory management.
+ * Handles inventory-related gRPC requests using Spring's @GrpcService annotation.
+ */
 @GrpcService
 @RequiredArgsConstructor
 public class InventoryGrpcService extends InventoryGrpc.InventoryImplBase {

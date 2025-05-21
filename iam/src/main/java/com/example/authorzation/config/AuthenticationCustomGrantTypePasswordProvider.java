@@ -21,6 +21,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Custom authentication provider that handles password grant type authentication for OAuth2.
+ * This provider generates and manages access tokens and refresh tokens for authenticated users.
+ * It works with the OAuth2 authorization framework to provide secure token-based authentication.
+ */
 @Component
 @RequiredArgsConstructor
 public class AuthenticationCustomGrantTypePasswordProvider implements AuthenticationProvider {
@@ -28,6 +33,15 @@ public class AuthenticationCustomGrantTypePasswordProvider implements Authentica
     private final OAuth2AuthorizationService authorizationService;
 
 
+    /**
+     * Authenticates the provided authentication token and generates OAuth2 tokens.
+     * This method processes the custom password authentication token, generates access and refresh tokens,
+     * saves the authorization, and returns the authenticated token with additional parameters.
+     *
+     * @param authentication the authentication token to process
+     * @return authenticated OAuth2AccessTokenAuthenticationToken containing access and refresh tokens
+     * @throws AuthenticationException if authentication fails or token generation fails
+     */
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         CustomPasswordAuthenticationToken customPasswordAuthenticationToken = (CustomPasswordAuthenticationToken) authentication;
@@ -97,6 +111,12 @@ public class AuthenticationCustomGrantTypePasswordProvider implements Authentica
                 additionalParameter);
     }
 
+    /**
+     * Determines if this provider supports the specified authentication token type.
+     *
+     * @param authentication the class to check
+     * @return true if the class is assignable from CustomPasswordAuthenticationToken
+     */
     @Override
     public boolean supports(Class<?> authentication) {
         return CustomPasswordAuthenticationToken.class.isAssignableFrom(authentication);

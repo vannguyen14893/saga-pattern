@@ -37,6 +37,25 @@ public class LanguagesController {
                 .body(content);
     }
 
+    @GetMapping("/document/{name}.json")
+    public ResponseEntity<String> data(@PathVariable String name) throws IOException {
+
+        Resource resource = resourceLoader.getResource(
+                "classpath:/static/locales/" + name + ".json");
+
+        if (!resource.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        String content = new String(
+                resource.getInputStream().readAllBytes(),
+                StandardCharsets.UTF_8
+        );
+        return ResponseEntity.ok()
+                .header("Content-Type", "application/json")
+                .body(content);
+    }
+
     @PostMapping("/translations/add/{lng}/{ns}")
     public ResponseEntity<Void> addMissingTranslation(
             @PathVariable String lng,

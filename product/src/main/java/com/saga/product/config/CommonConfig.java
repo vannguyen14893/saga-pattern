@@ -8,6 +8,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.kafka.annotation.EnableKafka;
 
+/**
+ * Common configuration class that combines multiple configuration aspects of the application.
+ * This class enables and configures:
+ * - Kafka messaging (@EnableKafka)
+ * - JPA auditing with custom auditor awareness
+ * - Database configuration
+ * - Security resource settings
+ * - Swagger documentation
+ */
 @EnableKafka
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")

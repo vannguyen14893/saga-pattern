@@ -8,7 +8,7 @@ public record ResponseError<T>(
         String id,
 
         @Schema(description = "HTTP status code", examples = {"400", "401", "403", "404", " 500"})
-        int status,
+        String status,
 
         @Schema(description = "Error message or details. Can be a string or a structured object depending on the error type")
         T message

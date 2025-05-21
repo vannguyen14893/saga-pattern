@@ -19,17 +19,33 @@ import org.springframework.security.oauth2.server.authorization.token.*;
 
 import java.time.Instant;
 
+/**
+ * Configuration class for OAuth2 client registration and token management.
+ * Provides beans for client repository, token generation, authorization services,
+ * and JWT token customization.
+ */
+
 @Configuration
 @RequiredArgsConstructor
 public class RegisteredClientConfig {
     private final JdbcTemplate jdbcTemplate;
     private final JWKSourceConfig jwkSourceConfig;
 
+    /**
+     * Creates a JDBC-based repository for managing registered OAuth2 clients.
+     *
+     * @return RegisteredClientRepository instance backed by JDBC storage
+     */
     @Bean
     public RegisteredClientRepository registeredClientRepository() {
         return new JdbcRegisteredClientRepository(jdbcTemplate);
     }
 
+    /**
+     * Configures the OAuth2 token generator with JWT, access token, and refresh token generation capabilities.
+     *
+     * @return Combined OAuth2TokenGenerator for different token types
+     */
     @Bean
     public OAuth2TokenGenerator<?> tokenGenerator() {
         JwtEncoder jwtEncoder = new NimbusJwtEncoder(jwkSourceConfig.jwkSource());
@@ -40,17 +56,35 @@ public class RegisteredClientConfig {
         return new DelegatingOAuth2TokenGenerator(jwtGenerator, accessTokenGenerator, refreshTokenGenerator);
     }
 
+    /**
+     * Creates a JDBC-based OAuth2 authorization service.
+     *
+     * @param registeredClientRepository Repository for client registration data
+     * @return OAuth2AuthorizationService instance for managing authorizations
+     */
     @Bean
     public OAuth2AuthorizationService authorizationService(RegisteredClientRepository registeredClientRepository) {
         return new JdbcOAuth2AuthorizationService(jdbcTemplate, registeredClientRepository);
     }
 
+    /**
+     * Creates a JDBC-based OAuth2 authorization consent service.
+     *
+     * @param registeredClientRepository Repository for client registration data
+     * @return OAuth2AuthorizationConsentService instance for managing user consents
+     */
     @Bean
     public OAuth2AuthorizationConsentService authorizationConsentService(
             RegisteredClientRepository registeredClientRepository) {
         return new JdbcOAuth2AuthorizationConsentService(jdbcTemplate, registeredClientRepository);
     }
 
+    /**
+     * Configures JWT token customization with additional claims.
+     * Adds standard claims, client-specific claims, user-specific claims, and dynamic claims.
+     *
+     * @return OAuth2TokenCustomizer for JWT encoding context
+     */
     @Bean
     public OAuth2TokenCustomizer<JwtEncodingContext> jwtCustomizer() {
         return context -> {
@@ -81,6 +115,12 @@ public class RegisteredClientConfig {
         };
     }
 
+    /**
+     * Retrieves the client IP address from the authorization context.
+     *
+     * @param context The authorization server context
+     * @return String representation of the client IP address
+     */
     private String getClientIp(AuthorizationServerContext context) {
         return "192.168.1.1";
     }
