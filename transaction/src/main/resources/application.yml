@@ -3,8 +3,12 @@ spring:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
-  main:
-    allow-bean-definition-overriding: true
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 100
+        order_updates: 10
+        order_inserts: true
 database:
   enable: true
   url: "jdbc:mysql://localhost:3306/transaction"
@@ -24,5 +28,6 @@ database:
 kafka:
   boot-strap-server: "localhost:29092"
   group-id: "transaction"
+  batch-listener: true
 server:
   port: 8087

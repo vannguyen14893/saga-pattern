@@ -1,4 +1,4 @@
-package org.demo.cucumber.steps;
+package org.demo.cucumber.selenium;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;

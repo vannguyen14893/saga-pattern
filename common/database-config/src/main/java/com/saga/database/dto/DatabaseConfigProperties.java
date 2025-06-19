@@ -1,9 +1,12 @@
 package com.saga.database.dto;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.validation.annotation.Validated;
+
 import java.util.Map;
 
 /**
@@ -16,6 +19,7 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "database", ignoreUnknownFields = false)
 @Data
 @Validated
+@JsonNaming(PropertyNamingStrategies.KebabCaseStrategy.class)
 public class DatabaseConfigProperties {
     /**
      * Flag to enable/disable the database configuration.
@@ -55,22 +59,18 @@ public class DatabaseConfigProperties {
     /**
      * Flag to enable/disable auto-commit mode for database transactions.
      */
-    @JsonProperty("auto-commit")
     private boolean autoCommit;
     /**
      * Name of the connection pool.
      */
-    @JsonProperty("pool-name")
     private String poolName;
     /**
      * Maximum number of connections in the pool.
      */
-    @JsonProperty("max-pool-size")
     private int maxPoolSize;
     /**
      * Minimum number of idle connections in the pool.
      */
-    @JsonProperty("min-pool-size")
     private int minPoolSize;
     /**
      * Additional database properties as key-value pairs.

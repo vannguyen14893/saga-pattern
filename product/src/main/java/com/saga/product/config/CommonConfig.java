@@ -21,4 +21,5 @@ import org.springframework.kafka.annotation.EnableKafka;
 @Configuration
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class CommonConfig extends SwaggerConfig implements DatabaseConfig, KafkaConfig, SecurityResourceConfig {
+
 }

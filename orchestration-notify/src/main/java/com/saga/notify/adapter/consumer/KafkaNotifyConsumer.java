@@ -20,6 +20,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * Kafka consumer component that processes notification messages from the orchestration-notify topic.
+ * Handles three types of notifications: EMAIL, SMS, and PUSH.
+ * Each notification type is processed and forwarded to its respective producer service.
+ */
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -32,11 +37,16 @@ public class KafkaNotifyConsumer {
     private final KafkaPushProducer kafkaPushProducer;
     private final KafkaSmsProducer kafkaSmsProducer;
 
+    /**
+     * Processes incoming notification messages from Kafka.
+     * Deserializes JSON messages and routes them to appropriate producers based on notification type.
+     *
+     * @param messages List of JSON strings containing notification data
+     * @throws IOException if there's an error parsing the JSON messages
+     */
     @Async
     @KafkaListener(topics = "orchestration-notify", groupId = "${kafka.group-id}", batch = "true")
     public void notifyListener(List<String> messages) throws IOException {
-//CreateOutboxEventRequest outBoxEventRequest = new CreateOutboxEventRequest(UUID.randomUUID().toString(), AggregateType.ORDER.name(), createOrderRequest.orderId(),
-//                OrderStatus.ORDER_UPDATE_INVENTORY.name(), payload);
         for (String messageStr : messages) {
             log.info("notify request: " + messageStr);
             JsonNode jsonNode = objectMapper.readTree(messageStr);

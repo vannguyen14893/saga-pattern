@@ -1,5 +1,7 @@
 package com.saga.kafka.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -13,6 +15,7 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "kafka", ignoreUnknownFields = false)
 @Data
 @Validated
+@JsonNaming(PropertyNamingStrategies.KebabCaseStrategy.class)
 public class KafkaConfigProperties {
     @NotBlank
     private String bootStrapServer;

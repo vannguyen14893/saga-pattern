@@ -1,0 +1,1083 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "description": "Product api",
+    "license": {
+      "name": "Saga license",
+      "url": "http://localhost:8088"
+    },
+    "termsOfService": "http://localhost:8088",
+    "title": "API",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8085",
+      "description": "Server swagger localhost"
+    },
+    {
+      "url": "http://localhost:8086",
+      "description": "Server swagger localhost"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "description": "Operations pertaining to update product in the system",
+      "name": "Update product"
+    },
+    {
+      "description": "Operations pertaining to delete product in the system",
+      "name": "Delete product"
+    },
+    {
+      "description": "Operations pertaining to retrieve products from the system",
+      "name": "Get product"
+    },
+    {
+      "description": "Operations pertaining to get product by name in the system",
+      "name": "Update product"
+    }
+  ],
+  "paths": {
+    "/product": {
+      "get": {
+        "description": "Get list product",
+        "operationId": "list",
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaginationResultListProductResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "b20e1bd8-ef0f-49a0-aa84-5ad60c07e2ca",
+                  "message": "Handle method argument not valid",
+                  "status": "400"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Handle method argument not valid"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "79960b41-7038-4a9e-aa3f-49ebe863f9c7",
+                  "message": "Unauthorized",
+                  "status": "401"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "191d2aa8-1105-4aad-a6b4-75d33530a8f7",
+                  "message": "Forbidden",
+                  "status": "403"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "97488034-a76b-43f3-8b08-03ea6acb5506",
+                  "message": "Resource not found",
+                  "status": "404"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Resource not found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "4538f267-d4d3-4d5c-8ca7-a67c6ecc5df1",
+                  "message": "Method Not Allowed",
+                  "status": "405"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "34026149-8aa9-4ee5-a9be-05f5c6668777",
+                  "message": "Unsupported Media Type",
+                  "status": "415"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Unsupported Media Type"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "14cee7e2-80a7-43a8-a54d-ae354accfde7",
+                  "message": "Server error",
+                  "status": "500"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server error"
+          }
+        },
+        "summary": "Get list product",
+        "tags": [
+          "product"
+        ]
+      },
+      "post": {
+        "description": "Creates a new product based on the provided request data",
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProductRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessProductResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "32935a52-21b3-40c2-b609-0162cafe3429",
+                  "message": "Handle method argument not valid",
+                  "status": "400"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Handle method argument not valid"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "a4cd1d71-be92-45d2-af94-6d33cf4c5b89",
+                  "message": "Unauthorized",
+                  "status": "401"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "597f0ec7-c10d-4353-bd83-21ba892a6d70",
+                  "message": "Forbidden",
+                  "status": "403"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "f79a184b-e40f-4d47-9dc8-6ffed6267bb3",
+                  "message": "Resource not found",
+                  "status": "404"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Resource not found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "c838ad18-c74b-49ed-94b8-2fd07617597b",
+                  "message": "Method Not Allowed",
+                  "status": "405"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "d1c2a3b1-a840-4dbe-9e55-d2f4cec8d0ae",
+                  "message": "Unsupported Media Type",
+                  "status": "415"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Unsupported Media Type"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "88267c60-fefb-4cd6-91c3-d7032b706231",
+                  "message": "Server error",
+                  "status": "500"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server error"
+          }
+        },
+        "summary": "Create new product",
+        "tags": [
+          "product"
+        ]
+      },
+      "put": {
+        "description": "Update a product based on the provided request data",
+        "operationId": "update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProductRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessProductResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "90e2f5cb-6126-4946-bb83-c76eaff9f852",
+                  "message": "Handle method argument not valid",
+                  "status": "400"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Handle method argument not valid"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "d2a19277-8892-4385-8fbf-9e134825a6ff",
+                  "message": "Unauthorized",
+                  "status": "401"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "d0af17e4-1ab4-424a-8410-49d1237dc665",
+                  "message": "Forbidden",
+                  "status": "403"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "2aa4ac1f-add7-471c-a96b-2fabf2ef50be",
+                  "message": "Resource not found",
+                  "status": "404"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Resource not found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "84988f68-3690-42de-a128-7f32fff5c647",
+                  "message": "Method Not Allowed",
+                  "status": "405"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "2496ca95-badb-4b0e-9905-0379689ab5df",
+                  "message": "Unsupported Media Type",
+                  "status": "415"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Unsupported Media Type"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "91b854ad-cb1c-441a-af79-84dfaccd58f9",
+                  "message": "Server error",
+                  "status": "500"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server error"
+          }
+        },
+        "summary": "Update product",
+        "tags": [
+          "product",
+          "Update product"
+        ]
+      }
+    },
+    "/product/{id}": {
+      "delete": {
+        "description": "Delete a new product based on the provided id",
+        "operationId": "delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessLong"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "925c492a-fbc1-4a8f-b7b9-a98a0b942ac6",
+                  "message": "Handle method argument not valid",
+                  "status": "400"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Handle method argument not valid"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "1a9c677d-c12e-4f28-b0c1-8aa3b3a164d3",
+                  "message": "Unauthorized",
+                  "status": "401"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "f3ef3c61-8f63-43dc-b01a-81e6f9ab80e7",
+                  "message": "Forbidden",
+                  "status": "403"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "9eda5fb0-1768-46bf-bea1-3bf4cb28ad68",
+                  "message": "Resource not found",
+                  "status": "404"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Resource not found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "36ef60d2-0487-4c78-95d6-f5e761c649aa",
+                  "message": "Method Not Allowed",
+                  "status": "405"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "1cce2b25-c717-4e75-9a21-b8f5dc154edc",
+                  "message": "Unsupported Media Type",
+                  "status": "415"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Unsupported Media Type"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "d7f2b4c4-63a9-4f96-9953-b836f2ab023d",
+                  "message": "Server error",
+                  "status": "500"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server error"
+          }
+        },
+        "summary": "Delete product",
+        "tags": [
+          "product",
+          "Delete product"
+        ]
+      },
+      "get": {
+        "description": "Find by product by id",
+        "operationId": "findById",
+        "parameters": [
+          {
+            "description": "ID of product to be retrieved",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessProductResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "0b5f95ec-92ed-4c1d-8351-bd8cc002cf87",
+                  "message": "Handle method argument not valid",
+                  "status": "400"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Handle method argument not valid"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "6662c02e-f08f-4f42-8880-ad3e27cf132a",
+                  "message": "Unauthorized",
+                  "status": "401"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "7da11f84-cede-464e-8e58-e011be447e65",
+                  "message": "Forbidden",
+                  "status": "403"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "b72e10c6-3d2a-4559-bc39-62f0723cc72e",
+                  "message": "Resource not found",
+                  "status": "404"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Resource not found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "f7ee75f1-3224-470b-9ec8-c959644773bc",
+                  "message": "Method Not Allowed",
+                  "status": "405"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "49d31d7b-1979-49f3-971c-d2d122150361",
+                  "message": "Unsupported Media Type",
+                  "status": "415"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Unsupported Media Type"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "07da3f8c-aebd-4896-9f0b-9bebb5d56ef4",
+                  "message": "Server error",
+                  "status": "500"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server error"
+          }
+        },
+        "summary": "Find by product by id",
+        "tags": [
+          "product",
+          "Get product"
+        ]
+      }
+    },
+    "/product/{name}": {
+      "get": {
+        "description": "Find by product by name",
+        "operationId": "findByName",
+        "parameters": [
+          {
+            "description": "Name of product to be get info",
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSuccessProductResponse"
+                }
+              }
+            },
+            "description": "OK"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "5c2fa87a-d9a0-4693-aeff-491f8fb016d2",
+                  "message": "Handle method argument not valid",
+                  "status": "400"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Handle method argument not valid"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "68b7af32-7819-4f0c-a983-b0a11d5b0bb4",
+                  "message": "Unauthorized",
+                  "status": "401"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Unauthorized"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "d721a24e-f272-40ac-8c45-358dc567314c",
+                  "message": "Forbidden",
+                  "status": "403"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Forbidden"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "607ffc2e-a95d-4df8-895e-9b7e0e9b068b",
+                  "message": "Resource not found",
+                  "status": "404"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Resource not found"
+          },
+          "405": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "576db16c-27d2-4204-89a4-e73fb0a1cbe6",
+                  "message": "Method Not Allowed",
+                  "status": "405"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Method Not Allowed"
+          },
+          "415": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "6f9efef5-421c-470f-aaa1-fca250a902db",
+                  "message": "Unsupported Media Type",
+                  "status": "415"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Unsupported Media Type"
+          },
+          "500": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "id": "e4ed10ff-46aa-4c3a-92cd-efeb3e3ea5ef",
+                  "message": "Server error",
+                  "status": "500"
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseError"
+                }
+              }
+            },
+            "description": "Server error"
+          }
+        },
+        "summary": "Find by product by name",
+        "tags": [
+          "product",
+          "Update product"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateProductRequest": {
+        "type": "object",
+        "description": "Request object for creating a new product",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID of the category the product belongs to",
+            "example": 1
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the product",
+            "example": "Latest model smartphone with advanced features"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the product",
+            "example": "Smartphone"
+          },
+          "price": {
+            "type": "number",
+            "description": "Price of the product",
+            "example": 999.99
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Available quantity of the product",
+            "example": 100
+          }
+        },
+        "required": [
+          "categoryId",
+          "name",
+          "price"
+        ]
+      },
+      "PaginationResultListProductResponse": {
+        "type": "object",
+        "description": "Wrapper class for paginated results",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "The paginated data content",
+            "items": {
+              "$ref": "#/components/schemas/ProductResponse"
+            }
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the response",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "Operation completed successfully"
+          },
+          "status": {
+            "type": "string",
+            "description": "HTTP status code",
+            "example": 200
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of elements across all pages",
+            "example": 42
+          }
+        }
+      },
+      "ProductResponse": {
+        "type": "object",
+        "description": "Response object containing product information",
+        "properties": {
+          "createdDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the product was created",
+            "example": "2024-03-21T10:30:00"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of the product",
+            "example": "Latest generation smartphone with advanced features"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unique identifier of the product",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the product",
+            "example": "Smartphone X1"
+          },
+          "price": {
+            "type": "number",
+            "description": "Product price in the default currency",
+            "example": 999.99
+          }
+        }
+      },
+      "ResponseError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Operation error"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "example": 200
+          }
+        }
+      },
+      "ResponseSuccessLong": {
+        "type": "object",
+        "description": "Standard success response wrapper",
+        "properties": {
+          "data": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Response payload data"
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the response",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "Operation completed successfully"
+          },
+          "status": {
+            "type": "string",
+            "description": "HTTP status code",
+            "example": 200
+          }
+        }
+      },
+      "ResponseSuccessProductResponse": {
+        "type": "object",
+        "description": "Standard success response wrapper",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ProductResponse",
+            "description": "Response payload data"
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the response",
+            "example": "123e4567-e89b-12d3-a456-426614174000"
+          },
+          "message": {
+            "type": "string",
+            "description": "Response message",
+            "example": "Operation completed successfully"
+          },
+          "status": {
+            "type": "string",
+            "description": "HTTP status code",
+            "example": 200
+          }
+        }
+      },
+      "UpdateProductRequest": {
+        "type": "object",
+        "description": "Request object for updating a product",
+        "properties": {
+          "categoryId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Category ID to which the product belongs",
+            "example": 1
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Available quantity of the product",
+            "example": 50,
+            "minimum": 0
+          },
+          "description": {
+            "type": "string",
+            "description": "Product description",
+            "example": "Latest model smartphone with advanced features"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Product ID",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "Product name",
+            "example": "Smartphone"
+          },
+          "price": {
+            "type": "number",
+            "description": "Product price",
+            "example": 999.99
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "bearerFormat": "JWT",
+        "scheme": "bearer",
+        "type": "http"
+      }
+    }
+  }
+}

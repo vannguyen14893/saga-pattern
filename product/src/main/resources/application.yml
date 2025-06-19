@@ -3,6 +3,10 @@ spring:
     hibernate.ddl-auto: update
     generate-ddl: true
     show-sql: true
+    properties:
+      hibernate:
+        boot:
+          allow_jdbc_metadata_access: false
   main:
     allow-bean-definition-overriding: true
 security:

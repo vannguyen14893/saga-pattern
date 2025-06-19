@@ -48,6 +48,7 @@ public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
     private final OneTimeTokenService oneTimeTokenService;
     private final CustomUserDetailCache customUserDetailCache;
+    private final CrossConfig crossConfig;
 
     /**
      * Configures the security filter chain for the OAuth2 authorization server.
@@ -61,7 +62,7 @@ public class SecurityConfig {
     @Order(1)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http)
             throws Exception {
-        http.cors(withDefaults());
+        http.cors(corsConfigurationSource(crossConfig.corsConfigurationSource()));
         http.csrf(AbstractHttpConfigurer::disable);
         http.exceptionHandling((exceptions) -> exceptions
                 .defaultAuthenticationEntryPointFor(new LoginUrlAuthenticationEntryPoint("/login"), new MediaTypeRequestMatcher(MediaType.TEXT_HTML)));
@@ -77,7 +78,7 @@ public class SecurityConfig {
                                 .authorizationConsentService(oAuth2AuthorizationConsentService))
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("custom/token/**",
-                                         "/swagger-ui.html",
+                                        "/swagger-ui.html",
                                         "/swagger-ui/**",
                                         "/v3/api-docs/**",
                                         "/swagger-resources/**",
@@ -103,7 +104,7 @@ public class SecurityConfig {
     @Order(2)
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
             throws Exception {
-        http.cors(withDefaults());
+        http.cors(corsConfigurationSource(crossConfig.corsConfigurationSource()));
         http.csrf(AbstractHttpConfigurer::disable);
         //http.oneTimeTokenLogin(withDefaults());
         http.authorizeHttpRequests((authorize) -> authorize.requestMatchers(
@@ -130,7 +131,7 @@ public class SecurityConfig {
                         .loginPage("/login")
                         .usernameParameter("phone")
                         .failureHandler(customAuthenticationFailureHandler)
-                       // .defaultSuccessUrl("/hello", true)
+                        // .defaultSuccessUrl("/hello", true)
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
