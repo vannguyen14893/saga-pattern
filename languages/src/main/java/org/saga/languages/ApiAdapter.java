@@ -5,13 +5,14 @@ import com.bazaarvoice.jolt.JsonUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.saga.exceptions.exceptions.BusinessExceptionHandler;
+import com.saga.exceptions.exceptions.CustomResponseErrorHandler;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.client.RestClient;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,18 +20,15 @@ import java.util.Map;
 
 public class ApiAdapter {
     @Autowired
-
-    private RestTemplate restTemplate;
+    private RestClient restClient;
 
     public String adapter(ConfigApi configApi) {
-        ResponseEntity<String> response = restTemplate.exchange(
-                configApi.url,
-                HttpMethod.valueOf(configApi.method),
-                buildRequestEntity(configApi.request != null ? transform(configApi.request, configApi.requestTemplate, configApi.type) : null, configApi.headers),
-                String.class,
-                configApi.params
-        );
-        return transform(response.getBody(), configApi.responseTemplate, configApi.type);
+        String body = restClient.method(HttpMethod.valueOf(configApi.method))
+                .uri(configApi.url)
+                .body(buildRequestEntity(configApi.request != null ? transform(configApi.request, configApi.requestTemplate, configApi.type) : null, configApi.headers))
+                .retrieve()
+                .body(String.class);
+        return transform(body, configApi.responseTemplate, configApi.type);
     }
 
     private HttpEntity<Object> buildRequestEntity(String request, Map<String, String> headers) {
@@ -55,11 +53,11 @@ public class ApiAdapter {
                     String jsonString = JsonUtils.toJsonString(jsonNode);
                     inputJsonConvert = JsonUtils.jsonToObject(jsonString);
                 } catch (JsonProcessingException e) {
-                    throw new RuntimeException("Error parsing XML to JSON: " + e.getMessage(), e);
+                    throw new BusinessExceptionHandler("Error parsing XML to JSON: " + e.getMessage());
                 }
                 break;
             default:
-                throw new IllegalArgumentException("Unsupported type: " + type);
+                throw new BusinessExceptionHandler("Unsupported type: " + type);
         }
         // Transform the input JSON
         Object transformedOutput = chainr.transform(inputJsonConvert);

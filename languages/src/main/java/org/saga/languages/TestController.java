@@ -3,15 +3,20 @@ package org.saga.languages;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
 public class TestController {
-    @GetMapping(value = "/response/xml",produces = "application/xml")
-    public ResponseEntity<String> testResponseXml() {
+    @GetMapping(value = "/response/xml", produces = "application/xml")
+    public ResponseEntity<String> testResponseXml(@RequestParam(value = "name", required = false) String name) {
+        if (StringUtils.hasText(name)) {
+            return ResponseEntity.status(400).body("invalid name parameter");
+        }
         String xmlResponse = "<root>\n" +
                 "  <welcome>Welcome to our application!</welcome>\n" +
                 "  <buttons>\n" +

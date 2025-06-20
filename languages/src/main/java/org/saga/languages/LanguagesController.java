@@ -1,5 +1,6 @@
 package org.saga.languages;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import lombok.RequiredArgsConstructor;
@@ -146,7 +147,7 @@ public class LanguagesController {
     }
 
     @GetMapping("/adapter")
-    public ResponseEntity<String> testAdapter() {
+    public ResponseEntity<Map<String,String>> testAdapter() {
         String joltSpecJson = "[\n" +
                 "    {\n" +
                 "        \"operation\": \"shift\",\n" +
@@ -168,15 +169,17 @@ public class LanguagesController {
                 "]";
         ApiAdapter.ConfigApi configApi = new ApiAdapter.ConfigApi();
         configApi.setMethod("GET");
-        configApi.setType("xml");
-        configApi.setUrl("http://localhost:8089/response/xml");
+        configApi.setType("json");
+        configApi.setUrl("http://localhost:8089/response/json");
         Map<String, String> headers = Map.of(
-                "Content-Type", "application/xml"
+                "Content-Type", "application/json"
 
         );
         configApi.setHeaders(headers);
         configApi.setResponseTemplate(joltSpecJson);
         String adapter = apiAdapter.adapter(configApi);
-        return ResponseEntity.ok(adapter);
+        Map<String,String> map =new HashMap<>();
+        map.put("adapter",adapter);
+        return ResponseEntity.ok(map);
     }
 }

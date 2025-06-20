@@ -117,15 +117,27 @@ public class CustomGlobalExceptionHandler {
     /**
      * Handles all other unhandled exceptions
      *
-     * @param ex The Exception
+     * @param ex The Exception,CustomServerException
      * @return ResponseEntity with generic error message
      */
-    @ExceptionHandler({Exception.class})
-    public ResponseEntity<ResponseError<String>> exception(final Exception ex) {
+    @ExceptionHandler({Exception.class, CustomServerException.class})
+    public ResponseEntity<ResponseError<String>> exception(final Exception ex,final CustomServerException customServerException) {
         log.info(ex.getMessage());
+        log.info(customServerException.getMessage());
         return execute("500", new DBMessageSourceConfig().getMessages("500"));
     }
 
+    /**
+     * Handles business exception errors
+     *
+     * @param ex The BusinessExceptionHandler
+     * @return ResponseEntity with error message
+     */
+    @ExceptionHandler({BusinessExceptionHandler.class})
+    public ResponseEntity<ResponseError<String>> businessExceptionHandler(final BusinessExceptionHandler ex) {
+        log.info(ex.getClass().getName());
+        return execute("400", ex.getMessage());
+    }
     /**
      * Helper method to create ResponseEntity with error details
      *
